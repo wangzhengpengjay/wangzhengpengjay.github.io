@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>医疗AI产品经理</title>
+<meta name="description" content="5年医疗AI产品经理，临床医学背景，主导讯飞医疗AI家医产品从0到1，高风险识别率96%，对话效果提升10%+。">
+
+<!-- Fonts: Archivo + Space Grotesk (ui-ux-pro-max: Minimalist Portfolio pairing) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- GSAP + ScrollTrigger for Apple-style scroll dynamics -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+<style>
+/* ===== Design Tokens — Pure Monochrome (black/white/gray) ===== */
+:root{
+  /* Surface */
+  --bg:#0a0a0a;
+  --bg-elevated:#111111;
+  --bg-card:rgba(255,255,255,0.03);
+  --bg-card-hover:rgba(255,255,255,0.06);
+  --bg-light:#fafafa;
+
+  /* Text tiers — Apple system hierarchy */
+  --text-primary:#f5f5f7;
+  --text-secondary:#a1a1a6;
+  --text-tertiary:#6e6e73;
+  --text-quaternary:#48484a;
+
+  /* Monochrome accent — no color, pure grayscale */
+  --accent:#ffffff;
+  --accent-dim:rgba(255,255,255,0.1);
+  --accent-2:#86868b;
+
+  /* Borders */
+  --border:rgba(255,255,255,0.08);
+  --border-hover:rgba(255,255,255,0.16);
+  --border-strong:rgba(255,255,255,0.24);
+
+  /* Radius */
+  --r-sm:8px;
+  --r-md:12px;
+  --r-lg:16px;
+  --r-xl:24px;
+  --r-full:9999px;
+
+  /* Shadows */
+  --shadow-sm:0 1px 3px rgba(0,0,0,0.3);
+  --shadow-md:0 4px 16px rgba(0,0,0,0.4);
+  --shadow-lg:0 16px 48px rgba(0,0,0,0.5);
+
+  /* Type */
+  --font-display:'Space Grotesk',-apple-system,BlinkMacSystemFont,'SF Pro Display','PingFang SC','Noto Sans SC',sans-serif;
+  --font-body:'Archivo',-apple-system,BlinkMacSystemFont,'SF Pro Text','PingFang SC','Noto Sans SC',sans-serif;
+  --font-mono:'SF Mono','JetBrains Mono','Menlo',monospace;
+
+  /* Spacing scale */
+  --space-xs:8px;
+  --space-sm:16px;
+  --space-md:24px;
+  --space-lg:40px;
+  --space-xl:64px;
+  --space-2xl:96px;
+  --space-3xl:128px;
+}
+
+/* ===== Reset ===== */
+*{margin:0;padding:0;box-sizing:border-box}
+html{
+  scroll-behavior:smooth;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  text-rendering:optimizeLegibility;
+}
+body{
+  font-family:var(--font-body);
+  background:var(--bg);
+  color:var(--text-primary);
+  line-height:1.6;
+  overflow-x:hidden;
+  min-height:100vh;
+}
+
+/* Reduced motion — accessibility (ui-ux-pro-max: Reduced Motion) */
+@media(prefers-reduced-motion:reduce){
+  *{animation-duration:0.01ms !important;transition-duration:0.01ms !important;scroll-behavior:auto !important}
+  .gsap-reveal{opacity:1 !important;transform:none !important}
+}
+
+/* Selection */
+::selection{background:var(--accent);color:var(--bg)}
+
+/* Scrollbar */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--text-quaternary);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:var(--text-tertiary)}
+
+/* ===== No-JS fallback — content visible without GSAP ===== */
+.gsap-reveal{opacity:1}
+.no-js .gsap-reveal{opacity:1;transform:none}
+
+/* ===== Navigation ===== */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:16px 24px;
+  background:rgba(10,10,10,0.72);
+  backdrop-filter:saturate(180%) blur(20px);
+  -webkit-backdrop-filter:saturate(180%) blur(20px);
+  border-bottom:1px solid var(--border);
+  transition:padding 0.3s ease,background 0.3s ease;
+}
+.nav-inner{
+  max-width:1200px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.nav-logo{
+  font-family:var(--font-display);
+  font-size:18px;font-weight:600;
+  letter-spacing:-0.02em;
+  color:var(--text-primary);
+  text-decoration:none;
+}
+.nav-links{display:flex;gap:32px;align-items:center}
+.nav-link{
+  font-size:14px;font-weight:400;
+  color:var(--text-secondary);
+  text-decoration:none;
+  transition:color 0.2s ease;
+  cursor:pointer;
+}
+.nav-link:hover{color:var(--text-primary)}
+.nav-cta{
+  font-size:14px;font-weight:500;
+  color:var(--bg);
+  background:var(--accent);
+  padding:8px 18px;
+  border-radius:var(--r-full);
+  text-decoration:none;
+  transition:opacity 0.2s ease,transform 0.2s ease;
+}
+.nav-cta:hover{opacity:0.85;transform:scale(0.98)}
+@media(max-width:640px){
+  .nav-links{gap:16px}
+  .nav-link:not(.nav-cta){display:none}
+}
+
+/* ===== Hero — Apple-style pinned section ===== */
+.hero{
+  min-height:100vh;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+  padding:120px 24px 80px;
+  overflow:hidden;
+}
+.hero-content{
+  max-width:900px;
+  text-align:center;
+  position:relative;z-index:2;
+}
+.hero-eyebrow{
+  font-family:var(--font-mono);
+  font-size:13px;font-weight:400;
+  color:var(--text-tertiary);
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  margin-bottom:32px;
+}
+.hero-name{
+  font-family:var(--font-display);
+  font-size:clamp(40px,8vw,96px);
+  font-weight:700;
+  line-height:0.95;
+  letter-spacing:-0.04em;
+  color:var(--text-primary);
+  margin-bottom:24px;
+}
+.hero-name .char{
+  display:inline-block;
+}
+.hero-role{
+  font-family:var(--font-display);
+  font-size:clamp(20px,4vw,32px);
+  font-weight:400;
+  color:var(--text-secondary);
+  letter-spacing:-0.01em;
+  margin-bottom:48px;
+}
+.hero-role span{
+  color:var(--text-primary);
+  font-weight:500;
+}
+.hero-meta{
+  display:flex;gap:48px;justify-content:center;flex-wrap:wrap;
+  margin-bottom:64px;
+}
+.hero-meta-item{
+  text-align:center;
+}
+.hero-meta-num{
+  font-family:var(--font-display);
+  font-size:clamp(32px,6vw,56px);
+  font-weight:700;
+  color:var(--text-primary);
+  line-height:1;
+  letter-spacing:-0.03em;
+}
+.hero-meta-label{
+  font-size:13px;
+  color:var(--text-tertiary);
+  margin-top:8px;
+  letter-spacing:0.02em;
+}
+.hero-scroll{
+  position:absolute;
+  bottom:40px;left:50%;
+  transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  color:var(--text-tertiary);
+  font-size:12px;
+  letter-spacing:0.05em;
+}
+.hero-scroll-line{
+  width:1px;height:32px;
+  background:linear-gradient(to bottom,transparent,var(--text-tertiary));
+  animation:scrollHint 2s ease-in-out infinite;
+}
+@keyframes scrollHint{
+  0%,100%{opacity:0.3;transform:scaleY(0.5)}
+  50%{opacity:1;transform:scaleY(1)}
+}
+
+/* Hero background — subtle grain texture */
+.hero-bg{
+  position:absolute;inset:0;z-index:0;
+  opacity:0.4;
+  background-image:
+    radial-gradient(ellipse at top,rgba(255,255,255,0.04) 0%,transparent 60%),
+    radial-gradient(ellipse at bottom,rgba(255,255,255,0.02) 0%,transparent 50%);
+}
+
+/* ===== Sections ===== */
+.section{
+  padding:var(--space-3xl) 24px;
+  position:relative;
+}
+.section-inner{
+  max-width:1000px;margin:0 auto;
+}
+.section-label{
+  font-family:var(--font-mono);
+  font-size:13px;
+  color:var(--text-tertiary);
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  margin-bottom:24px;
+  display:flex;align-items:center;gap:12px;
+}
+.section-label::before{
+  content:'';
+  width:24px;height:1px;
+  background:var(--text-tertiary);
+}
+.section-title{
+  font-family:var(--font-display);
+  font-size:clamp(32px,6vw,64px);
+  font-weight:600;
+  line-height:1.1;
+  letter-spacing:-0.03em;
+  color:var(--text-primary);
+  margin-bottom:var(--space-xl);
+  max-width:800px;
+}
+
+/* ===== About / Summary ===== */
+.about-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:var(--space-2xl);
+  align-items:start;
+}
+@media(max-width:768px){
+  .about-grid{grid-template-columns:1fr;gap:var(--space-lg)}
+}
+.about-text{
+  font-size:18px;
+  line-height:1.7;
+  color:var(--text-secondary);
+}
+.about-text p{margin-bottom:var(--space-md)}
+.about-text strong{color:var(--text-primary);font-weight:500}
+.about-highlight{
+  font-family:var(--font-display);
+  font-size:clamp(24px,4vw,40px);
+  font-weight:500;
+  line-height:1.3;
+  letter-spacing:-0.02em;
+  color:var(--text-primary);
+}
+.about-highlight em{
+  font-style:normal;
+  color:var(--text-tertiary);
+}
+
+/* ===== Stats Row ===== */
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1px;
+  background:var(--border);
+  border:1px solid var(--border);
+  border-radius:var(--r-lg);
+  overflow:hidden;
+  margin-top:var(--space-2xl);
+}
+@media(max-width:768px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+}
+.stat{
+  background:var(--bg);
+  padding:var(--space-lg) var(--space-md);
+  text-align:center;
+}
+.stat-num{
+  font-family:var(--font-display);
+  font-size:clamp(28px,5vw,48px);
+  font-weight:700;
+  color:var(--text-primary);
+  line-height:1;
+  letter-spacing:-0.03em;
+}
+.stat-num .unit{
+  font-size:0.5em;
+  color:var(--text-tertiary);
+  font-weight:400;
+}
+.stat-label{
+  font-size:13px;
+  color:var(--text-tertiary);
+  margin-top:12px;
+}
+
+/* ===== Experience Timeline ===== */
+.timeline{
+  position:relative;
+  padding-left:32px;
+}
+.timeline::before{
+  content:'';
+  position:absolute;
+  left:0;top:8px;bottom:8px;
+  width:1px;
+  background:var(--border);
+}
+.timeline-item{
+  position:relative;
+  padding-bottom:var(--space-2xl);
+}
+.timeline-item:last-child{padding-bottom:0}
+.timeline-dot{
+  position:absolute;
+  left:-36px;top:6px;
+  width:9px;height:9px;
+  border-radius:50%;
+  background:var(--bg);
+  border:2px solid var(--text-tertiary);
+  transition:border-color 0.3s,background 0.3s;
+}
+.timeline-item:hover .timeline-dot{
+  border-color:var(--accent);
+  background:var(--accent);
+}
+.timeline-header{
+  display:flex;align-items:baseline;justify-content:space-between;
+  gap:var(--space-md);
+  margin-bottom:8px;
+  flex-wrap:wrap;
+}
+.timeline-company{
+  font-family:var(--font-display);
+  font-size:24px;font-weight:600;
+  color:var(--text-primary);
+  letter-spacing:-0.01em;
+}
+.timeline-role{
+  font-size:15px;
+  color:var(--text-secondary);
+  margin-bottom:4px;
+}
+.timeline-date{
+  font-family:var(--font-mono);
+  font-size:13px;
+  color:var(--text-tertiary);
+  white-space:nowrap;
+}
+.timeline-body{
+  font-size:16px;
+  line-height:1.7;
+  color:var(--text-secondary);
+  margin-top:16px;
+}
+.timeline-body p{margin-bottom:12px}
+.timeline-body strong{color:var(--text-primary);font-weight:500}
+.timeline-tags{
+  display:flex;gap:8px;flex-wrap:wrap;
+  margin-top:16px;
+}
+.tag{
+  font-family:var(--font-mono);
+  font-size:12px;
+  color:var(--text-secondary);
+  padding:4px 12px;
+  border:1px solid var(--border);
+  border-radius:var(--r-full);
+}
+
+/* ===== Projects Grid ===== */
+.projects{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1px;
+  background:var(--border);
+  border:1px solid var(--border);
+  border-radius:var(--r-lg);
+  overflow:hidden;
+}
+@media(max-width:768px){
+  .projects{grid-template-columns:1fr}
+}
+.project{
+  background:var(--bg);
+  padding:var(--space-xl) var(--space-lg);
+  transition:background 0.3s ease;
+  cursor:default;
+}
+.project:hover{background:var(--bg-elevated)}
+.project-num{
+  font-family:var(--font-mono);
+  font-size:13px;
+  color:var(--text-quaternary);
+  margin-bottom:16px;
+}
+.project-title{
+  font-family:var(--font-display);
+  font-size:24px;font-weight:600;
+  color:var(--text-primary);
+  letter-spacing:-0.01em;
+  margin-bottom:12px;
+}
+.project-desc{
+  font-size:15px;
+  line-height:1.7;
+  color:var(--text-secondary);
+  margin-bottom:20px;
+}
+.project-metrics{
+  display:flex;gap:24px;flex-wrap:wrap;
+  margin-bottom:16px;
+}
+.project-metric{
+  display:flex;flex-direction:column;
+}
+.project-metric-val{
+  font-family:var(--font-display);
+  font-size:28px;font-weight:700;
+  color:var(--text-primary);
+  line-height:1;
+  letter-spacing:-0.02em;
+}
+.project-metric-label{
+  font-size:12px;
+  color:var(--text-tertiary);
+  margin-top:6px;
+}
+.project-tags{
+  display:flex;gap:8px;flex-wrap:wrap;
+}
+
+/* ===== Skills ===== */
+.skills-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1px;
+  background:var(--border);
+  border:1px solid var(--border);
+  border-radius:var(--r-lg);
+  overflow:hidden;
+}
+@media(max-width:768px){
+  .skills-grid{grid-template-columns:repeat(2,1fr)}
+}
+.skill-cat{
+  background:var(--bg);
+  padding:var(--space-lg) var(--space-md);
+}
+.skill-cat-name{
+  font-family:var(--font-mono);
+  font-size:12px;
+  color:var(--text-tertiary);
+  letter-spacing:0.05em;
+  text-transform:uppercase;
+  margin-bottom:16px;
+}
+.skill-list{
+  list-style:none;
+  display:flex;flex-direction:column;gap:8px;
+}
+.skill-item{
+  font-size:15px;
+  color:var(--text-secondary);
+  line-height:1.5;
+}
+
+/* ===== Education ===== */
+.edu-card{
+  border:1px solid var(--border);
+  border-radius:var(--r-lg);
+  padding:var(--space-xl) var(--space-lg);
+  display:flex;align-items:center;justify-content:space-between;
+  gap:var(--space-lg);
+  flex-wrap:wrap;
+}
+.edu-school{
+  font-family:var(--font-display);
+  font-size:28px;font-weight:600;
+  color:var(--text-primary);
+  letter-spacing:-0.01em;
+}
+.edu-major{
+  font-size:16px;
+  color:var(--text-secondary);
+  margin-top:8px;
+}
+.edu-meta{
+  display:flex;gap:32px;
+}
+.edu-meta-item{
+  text-align:right;
+}
+.edu-meta-val{
+  font-family:var(--font-display);
+  font-size:20px;font-weight:500;
+  color:var(--text-primary);
+}
+.edu-meta-label{
+  font-size:13px;
+  color:var(--text-tertiary);
+  margin-top:4px;
+}
+
+/* ===== Contact / Footer ===== */
+.contact{
+  text-align:center;
+  padding:var(--space-3xl) 24px;
+  border-top:1px solid var(--border);
+}
+.contact-eyebrow{
+  font-family:var(--font-mono);
+  font-size:13px;
+  color:var(--text-tertiary);
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  margin-bottom:24px;
+}
+.contact-title{
+  font-family:var(--font-display);
+  font-size:clamp(36px,7vw,72px);
+  font-weight:600;
+  line-height:1.1;
+  letter-spacing:-0.03em;
+  color:var(--text-primary);
+  margin-bottom:48px;
+  max-width:800px;
+  margin-left:auto;margin-right:auto;
+}
+.contact-links{
+  display:flex;gap:24px;justify-content:center;flex-wrap:wrap;
+  margin-bottom:var(--space-2xl);
+}
+.contact-link{
+  display:flex;align-items:center;gap:10px;
+  font-size:16px;
+  color:var(--text-secondary);
+  text-decoration:none;
+  padding:12px 24px;
+  border:1px solid var(--border);
+  border-radius:var(--r-full);
+  transition:all 0.2s ease;
+}
+.contact-link:hover{
+  color:var(--text-primary);
+  border-color:var(--border-hover);
+  background:var(--bg-card);
+}
+.contact-link svg{
+  width:18px;height:18px;
+  flex-shrink:0;
+}
+.footer{
+  padding:32px 24px;
+  border-top:1px solid var(--border);
+  text-align:center;
+}
+.footer-text{
+  font-size:13px;
+  color:var(--text-quaternary);
+}
+
+/* ===== GSAP Reveal base (hidden until animated) ===== */
+.gsap-reveal{
+  opacity:0;
+}
+.gsap-reveal-y{
+  opacity:0;
+  transform:translateY(40px);
+}
+
+/* ===== Mobile adjustments ===== */
+@media(max-width:640px){
+  .section{padding:var(--space-2xl) 20px}
+  .hero{padding:100px 20px 60px}
+  .hero-meta{gap:24px}
+  .timeline{padding-left:24px}
+  .timeline-dot{left:-28px}
+  .project{padding:var(--space-lg) var(--space-md)}
+}
+</style>
+</head>
+<body class="no-js">
+
+<!-- ===== Navigation ===== -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">医疗AI产品经理</a>
+    <div class="nav-links">
+      <a href="#about" class="nav-link">关于</a>
+      <a href="#experience" class="nav-link">经历</a>
+      <a href="#projects" class="nav-link">项目</a>
+      <a href="#skills" class="nav-link">能力</a>
+      <a href="#contact" class="nav-link nav-cta">联系我</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== Hero ===== -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow gsap-reveal">医疗AI产品经理 · 杭州</div>
+    <h1 class="hero-name" id="heroName">让AI真正落地医疗场景</h1>
+    <p class="hero-role gsap-reveal">
+      <span>临床医学</span>背景，<span>AI大模型</span>驱动的<br>
+      医疗健康产品从0到1构建者
+    </p>
+    <div class="hero-meta gsap-reveal">
+      <div class="hero-meta-item">
+        <div class="hero-meta-num" data-count="5">0</div>
+        <div class="hero-meta-label">年医疗AI经验</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-num" data-count="96" data-suffix="%">0</div>
+        <div class="hero-meta-label">高风险识别率</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-num" data-count="10" data-suffix="%+">0</div>
+        <div class="hero-meta-label">对话效果提升</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll gsap-reveal">
+    <span>SCROLL</span>
+    <div class="hero-scroll-line"></div>
+  </div>
+</section>
+
+<!-- ===== About / Summary ===== -->
+<section class="section" id="about">
+  <div class="section-inner">
+    <div class="section-label gsap-reveal">01 — 关于</div>
+    <h2 class="section-title gsap-reveal">
+      将医学专业知识<br>与AI大模型能力深度结合
+    </h2>
+    <div class="about-grid">
+      <div class="about-text gsap-reveal">
+        <p>
+          5年医疗AI产品经理，<strong>临床医学（中西医结合）</strong>背景。擅长设计可解释、可溯源的智能健康服务闭环，主导讯飞医疗AI家医产品从0到1全生命周期管理。
+        </p>
+        <p>
+          覆盖居民端与医生端双端落地，<strong>高风险识别率提升至96%</strong>，重点场景对话效果提升10%+。主导腰椎间盘突出全病程管理商业化验证，实现用户点击率20%、买单转化率1%。
+        </p>
+        <p>
+          熟悉CDASH、SNOMED-CT、HL7等国际医疗数据标准，具备从知识图谱构建到NLP引擎医学支撑的完整数据标准化经验。
+        </p>
+      </div>
+      <div class="about-highlight gsap-reveal">
+        设计"AI管基础+康复、<em>医生管重点</em>"的分层协同机制，<em>让AI真正落地</em>基层医疗场景。
+      </div>
+    </div>
+
+    <div class="stats gsap-reveal">
+      <div class="stat">
+        <div class="stat-num">3000<span class="unit">万+</span></div>
+        <div class="stat-label">产品下载量</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">1.8<span class="unit">亿+</span></div>
+        <div class="stat-label">AI咨询量</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">800<span class="unit">+</span></div>
+        <div class="stat-label">覆盖区县</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">2600<span class="unit">+</span></div>
+        <div class="stat-label">覆盖疾病</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Experience Timeline ===== -->
+<section class="section" id="experience">
+  <div class="section-inner">
+    <div class="section-label gsap-reveal">02 — 工作经历</div>
+    <h2 class="section-title gsap-reveal">
+      从医学数据标准化<br>到AI产品全生命周期
+    </h2>
+
+    <div class="timeline">
+      <!-- Item 1 -->
+      <div class="timeline-item gsap-reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-header">
+          <div>
+            <div class="timeline-company">讯飞医疗科技股份有限公司</div>
+            <div class="timeline-role">医学产品BP</div>
+          </div>
+          <div class="timeline-date">2023.08 — 至今</div>
+        </div>
+        <div class="timeline-body">
+          <p>
+            <strong>AI家庭医生产品从0到1（BGC项目）</strong>：识别基层家医服务"医生少、患者多、随访流于形式"的核心矛盾，主导设计"AI管基础+康复、医生管重点"的分层协同机制。基于医疗大模型技术，完成可解释、可溯源的智能健康服务链路设计，覆盖智能问诊、报告解读、健康管理三大功能模块，推动居民端与医生端双端同步落地。协同模型团队将<strong>高风险识别率提升至96%</strong>。
+          </p>
+          <p>
+            <strong>C端对话效果优化</strong>：深度分析线上对话日志数据，系统性识别任务流瓶颈与用户未满足需求，协同能力层与平台团队针对性优化对话逻辑，实现<strong>重点场景对话效果提升10%以上</strong>。主导构建1,000余条高质量医学训练数据集，有效提升AI回答的医学准确性与专业度。
+          </p>
+          <p>
+            <strong>腰突专病管理商业化验证</strong>：从用户对话日志中洞察腰椎间盘突出患者缺乏院外长期管理工具的痛点，主导从0到1完成全病程健康管理服务的产品逻辑与医学逻辑双重设计。商业化验证期间<strong>用户点击率达到20%，实现1%买单转化率</strong>。
+          </p>
+        </div>
+        <div class="timeline-tags">
+          <span class="tag">医疗大模型</span>
+          <span class="tag">对话系统</span>
+          <span class="tag">风险分层</span>
+          <span class="tag">B端+C端</span>
+          <span class="tag">商业化验证</span>
+        </div>
+      </div>
+
+      <!-- Item 2 -->
+      <div class="timeline-item gsap-reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-header">
+          <div>
+            <div class="timeline-company">上海森亿医疗科技有限公司</div>
+            <div class="timeline-role">医学经理</div>
+          </div>
+          <div class="timeline-date">2021.03 — 2023.08</div>
+        </div>
+        <div class="timeline-body">
+          <p>
+            作为医学负责人，与算法团队紧密协同，基于Omaha体系构建支持NLP医学数据抽取的<strong>知识图谱</strong>，显著提升业务在院端部署后的结构化效率与准确性。深度参与公司NLP-L2引擎工程建设，主导训练文本抽取模型的医学数据标注与质量管控，获<strong>公司协同合作奖</strong>。
+          </p>
+          <p>
+            主导上海申康医学发展中心指导的<strong>红房子宫颈癌数据集项目</strong>，参照CDASH、SNOMED-CT、HL7等国际术语标准完成数据标准化处理，构建国内宫颈癌领域权威数据交换标准并成功发表。
+          </p>
+          <p>
+            负责团体体检报告总体分析平台建设，设计"1+X+体检推荐"系统逻辑，在江苏省人民医院试验局验证AI全流程落地的可行性。
+          </p>
+        </div>
+        <div class="timeline-tags">
+          <span class="tag">知识图谱</span>
+          <span class="tag">NLP</span>
+          <span class="tag">CDASH</span>
+          <span class="tag">SNOMED-CT</span>
+          <span class="tag">HL7</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Projects ===== -->
+<section class="section" id="projects">
+  <div class="section-inner">
+    <div class="section-label gsap-reveal">03 — 核心项目</div>
+    <h2 class="section-title gsap-reveal">
+      从0到1，<br>从洞察到商业化验证
+    </h2>
+
+    <div class="projects">
+      <!-- Project 1 -->
+      <div class="project gsap-reveal">
+        <div class="project-num">P01</div>
+        <h3 class="project-title">讯飞医疗AI家医产品</h3>
+        <p class="project-desc">
+          从0到1主导AI家医产品逻辑设计，覆盖居民端与医生端双端场景，构建智能问诊-报告解读-健康管理完整功能闭环。设计分层协同机制，高风险识别率优化至96%，重点场景对话效果提升10%以上。
+        </p>
+        <div class="project-metrics">
+          <div class="project-metric">
+            <div class="project-metric-val">96%</div>
+            <div class="project-metric-label">高风险识别率</div>
+          </div>
+          <div class="project-metric">
+            <div class="project-metric-val">10%+</div>
+            <div class="project-metric-label">对话效果提升</div>
+          </div>
+        </div>
+        <div class="project-tags">
+          <span class="tag">医疗大模型</span>
+          <span class="tag">对话系统</span>
+          <span class="tag">B端+C端</span>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="project gsap-reveal">
+        <div class="project-num">P02</div>
+        <h3 class="project-title">腰突全病程管理商业化</h3>
+        <p class="project-desc">
+          从用户对话日志中识别腰突患者院外管理空白，主导产品逻辑与医学逻辑从0到1双重构建。设计覆盖健康教育、康复指导、随访跟踪的全病程管理路径，商业化验证用户付费意愿。
+        </p>
+        <div class="project-metrics">
+          <div class="project-metric">
+            <div class="project-metric-val">20%</div>
+            <div class="project-metric-label">用户点击率</div>
+          </div>
+          <div class="project-metric">
+            <div class="project-metric-val">1%</div>
+            <div class="project-metric-label">买单转化率</div>
+          </div>
+        </div>
+        <div class="project-tags">
+          <span class="tag">用户研究</span>
+          <span class="tag">医学路径设计</span>
+          <span class="tag">商业化验证</span>
+        </div>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="project gsap-reveal">
+        <div class="project-num">P03</div>
+        <h3 class="project-title">NLP-L2医学引擎</h3>
+        <p class="project-desc">
+          主导知识图谱医学内容体系建设，与算法团队协同完成文本抽取模型的训练与优化，支撑院内部署后非结构化文本的结构化处理能力，获公司协同合作奖。
+        </p>
+        <div class="project-metrics">
+          <div class="project-metric">
+            <div class="project-metric-val">Omaha</div>
+            <div class="project-metric-label">知识图谱体系</div>
+          </div>
+        </div>
+        <div class="project-tags">
+          <span class="tag">知识图谱</span>
+          <span class="tag">NLP</span>
+          <span class="tag">文本结构化</span>
+        </div>
+      </div>
+
+      <!-- Project 4 -->
+      <div class="project gsap-reveal">
+        <div class="project-num">P04</div>
+        <h3 class="project-title">申康宫颈癌数据集</h3>
+        <p class="project-desc">
+          主导数据集设计、变量提取与国际标准标准化全流程，参照CDASH、SNOMED-CT、HL7标准完成数据标准化处理，构建国内宫颈癌领域权威数据交换标准并成功发表。
+        </p>
+        <div class="project-metrics">
+          <div class="project-metric">
+            <div class="project-metric-val">已发表</div>
+            <div class="project-metric-label">权威数据标准</div>
+          </div>
+        </div>
+        <div class="project-tags">
+          <span class="tag">CDASH</span>
+          <span class="tag">SNOMED-CT</span>
+          <span class="tag">HL7</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Skills ===== -->
+<section class="section" id="skills">
+  <div class="section-inner">
+    <div class="section-label gsap-reveal">04 — 能力矩阵</div>
+    <h2 class="section-title gsap-reveal">
+      产品 × 医学 × AI<br>三维能力交叉
+    </h2>
+
+    <div class="skills-grid">
+      <div class="skill-cat gsap-reveal">
+        <div class="skill-cat-name">产品能力</div>
+        <ul class="skill-list">
+          <li class="skill-item">需求分析</li>
+          <li class="skill-item">竞品调研</li>
+          <li class="skill-item">用户研究</li>
+          <li class="skill-item">PRD撰写</li>
+          <li class="skill-item">原型设计</li>
+          <li class="skill-item">数据分析</li>
+          <li class="skill-item">敏捷迭代</li>
+        </ul>
+      </div>
+      <div class="skill-cat gsap-reveal">
+        <div class="skill-cat-name">行业知识</div>
+        <ul class="skill-list">
+          <li class="skill-item">CDASH</li>
+          <li class="skill-item">SNOMED-CT</li>
+          <li class="skill-item">ICD-10</li>
+          <li class="skill-item">HL7</li>
+          <li class="skill-item">医疗数据标准化</li>
+          <li class="skill-item">临床试验流程</li>
+        </ul>
+      </div>
+      <div class="skill-cat gsap-reveal">
+        <div class="skill-cat-name">AI应用</div>
+        <ul class="skill-list">
+          <li class="skill-item">医疗大模型产品设计</li>
+          <li class="skill-item">对话效果评估与优化</li>
+          <li class="skill-item">知识图谱构建</li>
+          <li class="skill-item">NLP训练数据建设</li>
+        </ul>
+      </div>
+      <div class="skill-cat gsap-reveal">
+        <div class="skill-cat-name">工具</div>
+        <ul class="skill-list">
+          <li class="skill-item">Figma</li>
+          <li class="skill-item">XMind</li>
+          <li class="skill-item">SQL</li>
+          <li class="skill-item">Git</li>
+          <li class="skill-item">Codex</li>
+          <li class="skill-item">Claude Code</li>
+          <li class="skill-item">OpenCode</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Education ===== -->
+<section class="section" id="education">
+  <div class="section-inner">
+    <div class="section-label gsap-reveal">05 — 教育</div>
+    <h2 class="section-title gsap-reveal">
+      临床医学<br>中西医结合
+    </h2>
+    <div class="edu-card gsap-reveal">
+      <div>
+        <div class="edu-school">安徽中医药大学</div>
+        <div class="edu-major">中西医结合临床 · 本科</div>
+      </div>
+      <div class="edu-meta">
+        <div class="edu-meta-item">
+          <div class="edu-meta-val">2015 — 2020</div>
+          <div class="edu-meta-label">就读时间</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Contact ===== -->
+<section class="contact" id="contact">
+  <div class="contact-eyebrow gsap-reveal">06 — 联系</div>
+  <h2 class="contact-title gsap-reveal">
+    让AI真正落地<br>医疗场景
+  </h2>
+  <div class="contact-links gsap-reveal">
+    <a href="mailto:wangzhengpengjay@outlook.com" class="contact-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+        <polyline points="22,6 12,13 2,6"/>
+      </svg>
+      wangzhengpengjay@outlook.com
+    </a>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer class="footer">
+  <p class="footer-text">© 2026 医疗AI产品经理 · 杭州</p>
+</footer>
+
+<script>
+// Remove no-js class — JS is running
+document.body.classList.remove('no-js');
+
+// Register GSAP plugins
+gsap.registerPlugin(ScrollTrigger);
+
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// ===== Hero entrance — Apple-style char stagger =====
+if(!prefersReducedMotion){
+  // Split hero name into chars for stagger animation
+  const heroName = document.getElementById('heroName');
+  const text = heroName.textContent;
+  heroName.innerHTML = '';
+  [...text].forEach((char, i) => {
+    const span = document.createElement('span');
+    span.className = 'char';
+    span.textContent = char === ' ' ? '\u00A0' : char;
+    heroName.appendChild(span);
+  });
+
+  // Hero timeline — chars rise in, then eyebrow/role/meta fade
+  const heroTl = gsap.timeline({ delay: 0.3 });
+  heroTl
+    .from('.hero-eyebrow', { opacity: 0, y: 20, duration: 0.6, ease: 'power2.out' })
+    .from('.hero-name .char', {
+      opacity: 0,
+      y: 60,
+      rotateX: -40,
+      duration: 0.8,
+      stagger: 0.08,
+      ease: 'expo.out'
+    }, '-=0.3')
+    .from('.hero-role', { opacity: 0, y: 30, duration: 0.7, ease: 'power2.out' }, '-=0.4')
+    .from('.hero-meta', { opacity: 0, y: 30, duration: 0.7, ease: 'power2.out' }, '-=0.4')
+    .from('.hero-scroll', { opacity: 0, duration: 0.8, ease: 'power2.out' }, '-=0.2');
+
+  // ===== Hero parallax — content drifts up slightly on scroll (Apple style) =====
+  gsap.to('.hero-content', {
+    yPercent: -15,
+    opacity: 0.3,
+    ease: 'none',
+    scrollTrigger: {
+      trigger: '.hero',
+      start: 'top top',
+      end: 'bottom top',
+      scrub: 1
+    }
+  });
+
+  // ===== Count-up animation for hero stats =====
+  document.querySelectorAll('[data-count]').forEach(el => {
+    const target = parseInt(el.dataset.count);
+    const suffix = el.dataset.suffix || '';
+    ScrollTrigger.create({
+      trigger: el,
+      start: 'top 90%',
+      once: true,
+      onEnter: () => {
+        gsap.fromTo(el, { textContent: 0 }, {
+          textContent: target,
+          duration: 1.5,
+          ease: 'power2.out',
+          snap: { textContent: 1 },
+          onUpdate: function() {
+            el.textContent = Math.round(this.targets()[0].textContent) + suffix;
+          }
+        });
+      }
+    });
+  });
+
+  // ===== Scroll reveals — subtle fade + rise (ui-ux-pro-max: Scroll Reveal Subtle) =====
+  gsap.utils.toArray('.gsap-reveal').forEach(el => {
+    gsap.fromTo(el, {
+      opacity: 0,
+      y: 40
+    }, {
+      opacity: 1,
+      y: 0,
+      duration: 0.7,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: el,
+        start: 'top 88%',
+        toggleActions: 'play none none reverse'
+      }
+    });
+  });
+
+  // ===== Timeline items stagger =====
+  gsap.utils.toArray('.timeline-item').forEach(item => {
+    gsap.from(item, {
+      opacity: 0,
+      x: -30,
+      duration: 0.6,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: item,
+        start: 'top 85%'
+      }
+    });
+  });
+
+  // ===== Section titles — slightly larger reveal =====
+  gsap.utils.toArray('.section-title').forEach(title => {
+    gsap.fromTo(title, {
+      opacity: 0,
+      y: 50
+    }, {
+      opacity: 1,
+      y: 0,
+      duration: 0.9,
+      ease: 'power3.out',
+      scrollTrigger: {
+        trigger: title,
+        start: 'top 85%',
+        toggleActions: 'play none none reverse'
+      }
+    });
+  });
+
+} else {
+  // Reduced motion — make everything visible immediately
+  document.querySelectorAll('.gsap-reveal').forEach(el => {
+    el.style.opacity = '1';
+    el.style.transform = 'none';
+  });
+}
+
+// ===== Nav shrink on scroll =====
+const nav = document.querySelector('.nav');
+let lastScroll = 0;
+window.addEventListener('scroll', () => {
+  const scroll = window.pageYOffset;
+  if(scroll > 50){
+    nav.style.padding = '10px 24px';
+  } else {
+    nav.style.padding = '16px 24px';
+  }
+  lastScroll = scroll;
+}, { passive: true });
+
+// ===== Refresh ScrollTrigger after fonts load =====
+if(document.fonts){
+  document.fonts.ready.then(() => {
+    ScrollTrigger.refresh();
+  });
+}
+</script>
+
+</body>
+</html>
