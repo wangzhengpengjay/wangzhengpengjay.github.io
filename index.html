@@ -6,59 +6,35 @@
 <title>医疗AI产品经理</title>
 <meta name="description" content="5年医疗AI产品经理，临床医学背景，主导讯飞医疗AI家医产品从0到1，高风险识别率96%，对话效果提升10%+。">
 
-<!-- Fonts: Archivo + Space Grotesk (ui-ux-pro-max: Minimalist Portfolio pairing) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-<!-- GSAP + ScrollTrigger for Apple-style scroll dynamics -->
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 
 <style>
-/* ===== Design Tokens — Pure Monochrome (black/white/gray) ===== */
 :root{
-  /* Surface */
   --bg:#0a0a0a;
   --bg-elevated:#111111;
   --bg-card:rgba(255,255,255,0.03);
   --bg-card-hover:rgba(255,255,255,0.06);
-  --bg-light:#fafafa;
-
-  /* Text tiers — Apple system hierarchy */
   --text-primary:#f5f5f7;
   --text-secondary:#a1a1a6;
   --text-tertiary:#6e6e73;
   --text-quaternary:#48484a;
-
-  /* Monochrome accent — no color, pure grayscale */
   --accent:#ffffff;
   --accent-dim:rgba(255,255,255,0.1);
-  --accent-2:#86868b;
-
-  /* Borders */
   --border:rgba(255,255,255,0.08);
   --border-hover:rgba(255,255,255,0.16);
-  --border-strong:rgba(255,255,255,0.24);
-
-  /* Radius */
   --r-sm:8px;
   --r-md:12px;
   --r-lg:16px;
   --r-xl:24px;
   --r-full:9999px;
-
-  /* Shadows */
-  --shadow-sm:0 1px 3px rgba(0,0,0,0.3);
-  --shadow-md:0 4px 16px rgba(0,0,0,0.4);
-  --shadow-lg:0 16px 48px rgba(0,0,0,0.5);
-
-  /* Type */
   --font-display:'Space Grotesk',-apple-system,BlinkMacSystemFont,'SF Pro Display','PingFang SC','Noto Sans SC',sans-serif;
   --font-body:'Archivo',-apple-system,BlinkMacSystemFont,'SF Pro Text','PingFang SC','Noto Sans SC',sans-serif;
   --font-mono:'SF Mono','JetBrains Mono','Menlo',monospace;
-
-  /* Spacing scale */
   --space-xs:8px;
   --space-sm:16px;
   --space-md:24px;
@@ -68,7 +44,6 @@
   --space-3xl:128px;
 }
 
-/* ===== Reset ===== */
 *{margin:0;padding:0;box-sizing:border-box}
 html{
   scroll-behavior:smooth;
@@ -85,26 +60,20 @@ body{
   min-height:100vh;
 }
 
-/* Reduced motion — accessibility (ui-ux-pro-max: Reduced Motion) */
 @media(prefers-reduced-motion:reduce){
   *{animation-duration:0.01ms !important;transition-duration:0.01ms !important;scroll-behavior:auto !important}
   .gsap-reveal{opacity:1 !important;transform:none !important}
 }
 
-/* Selection */
 ::selection{background:var(--accent);color:var(--bg)}
-
-/* Scrollbar */
 ::-webkit-scrollbar{width:6px}
 ::-webkit-scrollbar-track{background:var(--bg)}
 ::-webkit-scrollbar-thumb{background:var(--text-quaternary);border-radius:3px}
 ::-webkit-scrollbar-thumb:hover{background:var(--text-tertiary)}
 
-/* ===== No-JS fallback — content visible without GSAP ===== */
 .gsap-reveal{opacity:1}
 .no-js .gsap-reveal{opacity:1;transform:none}
 
-/* ===== Navigation ===== */
 .nav{
   position:fixed;top:0;left:0;right:0;z-index:100;
   padding:16px 24px;
@@ -112,44 +81,17 @@ body{
   backdrop-filter:saturate(180%) blur(20px);
   -webkit-backdrop-filter:saturate(180%) blur(20px);
   border-bottom:1px solid var(--border);
-  transition:padding 0.3s ease,background 0.3s ease;
+  transition:padding 0.3s ease;
 }
-.nav-inner{
-  max-width:1200px;margin:0 auto;
-  display:flex;align-items:center;justify-content:space-between;
-}
-.nav-logo{
-  font-family:var(--font-display);
-  font-size:18px;font-weight:600;
-  letter-spacing:-0.02em;
-  color:var(--text-primary);
-  text-decoration:none;
-}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:var(--font-display);font-size:18px;font-weight:600;letter-spacing:-0.02em;color:var(--text-primary);text-decoration:none}
 .nav-links{display:flex;gap:32px;align-items:center}
-.nav-link{
-  font-size:14px;font-weight:400;
-  color:var(--text-secondary);
-  text-decoration:none;
-  transition:color 0.2s ease;
-  cursor:pointer;
-}
+.nav-link{font-size:14px;color:var(--text-secondary);text-decoration:none;transition:color 0.2s ease;cursor:pointer}
 .nav-link:hover{color:var(--text-primary)}
-.nav-cta{
-  font-size:14px;font-weight:500;
-  color:var(--bg);
-  background:var(--accent);
-  padding:8px 18px;
-  border-radius:var(--r-full);
-  text-decoration:none;
-  transition:opacity 0.2s ease,transform 0.2s ease;
-}
+.nav-cta{font-size:14px;font-weight:500;color:var(--bg);background:var(--accent);padding:8px 18px;border-radius:var(--r-full);text-decoration:none;transition:opacity 0.2s ease,transform 0.2s ease}
 .nav-cta:hover{opacity:0.85;transform:scale(0.98)}
-@media(max-width:640px){
-  .nav-links{gap:16px}
-  .nav-link:not(.nav-cta){display:none}
-}
+@media(max-width:640px){.nav-links{gap:16px}.nav-link:not(.nav-cta){display:none}}
 
-/* ===== Hero — Apple-style pinned section ===== */
 .hero{
   min-height:100vh;
   display:flex;align-items:center;justify-content:center;
@@ -157,469 +99,105 @@ body{
   padding:120px 24px 80px;
   overflow:hidden;
 }
-.hero-content{
-  max-width:900px;
-  text-align:center;
-  position:relative;z-index:2;
-}
-.hero-eyebrow{
-  font-family:var(--font-mono);
-  font-size:13px;font-weight:400;
-  color:var(--text-tertiary);
-  letter-spacing:0.08em;
-  text-transform:uppercase;
-  margin-bottom:32px;
-}
+.hero-content{max-width:900px;text-align:center;position:relative;z-index:2}
+.hero-eyebrow{font-family:var(--font-mono);font-size:13px;color:var(--text-tertiary);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:32px}
 .hero-name{
   font-family:var(--font-display);
-  font-size:clamp(40px,8vw,96px);
+  font-size:clamp(32px,6.5vw,80px);
   font-weight:700;
   line-height:0.95;
-  letter-spacing:-0.04em;
-  color:var(--text-primary);
-  margin-bottom:24px;
-}
-.hero-name .char{
-  display:inline-block;
-}
-.hero-role{
-  font-family:var(--font-display);
-  font-size:clamp(20px,4vw,32px);
-  font-weight:400;
-  color:var(--text-secondary);
-  letter-spacing:-0.01em;
-  margin-bottom:48px;
-}
-.hero-role span{
-  color:var(--text-primary);
-  font-weight:500;
-}
-.hero-meta{
-  display:flex;gap:48px;justify-content:center;flex-wrap:wrap;
-  margin-bottom:64px;
-}
-.hero-meta-item{
-  text-align:center;
-}
-.hero-meta-num{
-  font-family:var(--font-display);
-  font-size:clamp(32px,6vw,56px);
-  font-weight:700;
-  color:var(--text-primary);
-  line-height:1;
-  letter-spacing:-0.03em;
-}
-.hero-meta-label{
-  font-size:13px;
-  color:var(--text-tertiary);
-  margin-top:8px;
   letter-spacing:0.02em;
-}
-.hero-scroll{
-  position:absolute;
-  bottom:40px;left:50%;
-  transform:translateX(-50%);
-  display:flex;flex-direction:column;align-items:center;gap:8px;
-  color:var(--text-tertiary);
-  font-size:12px;
-  letter-spacing:0.05em;
-}
-.hero-scroll-line{
-  width:1px;height:32px;
-  background:linear-gradient(to bottom,transparent,var(--text-tertiary));
-  animation:scrollHint 2s ease-in-out infinite;
-}
-@keyframes scrollHint{
-  0%,100%{opacity:0.3;transform:scaleY(0.5)}
-  50%{opacity:1;transform:scaleY(1)}
-}
-
-/* Hero background — subtle grain texture */
-.hero-bg{
-  position:absolute;inset:0;z-index:0;
-  opacity:0.4;
-  background-image:
-    radial-gradient(ellipse at top,rgba(255,255,255,0.04) 0%,transparent 60%),
-    radial-gradient(ellipse at bottom,rgba(255,255,255,0.02) 0%,transparent 50%);
-}
-
-/* ===== Sections ===== */
-.section{
-  padding:var(--space-3xl) 24px;
-  position:relative;
-}
-.section-inner{
-  max-width:1000px;margin:0 auto;
-}
-.section-label{
-  font-family:var(--font-mono);
-  font-size:13px;
-  color:var(--text-tertiary);
-  letter-spacing:0.08em;
-  text-transform:uppercase;
-  margin-bottom:24px;
-  display:flex;align-items:center;gap:12px;
-}
-.section-label::before{
-  content:'';
-  width:24px;height:1px;
-  background:var(--text-tertiary);
-}
-.section-title{
-  font-family:var(--font-display);
-  font-size:clamp(32px,6vw,64px);
-  font-weight:600;
-  line-height:1.1;
-  letter-spacing:-0.03em;
   color:var(--text-primary);
-  margin-bottom:var(--space-xl);
-  max-width:800px;
+  margin-bottom:24px;
 }
+.hero-name .char{display:inline-block}
+.hero-role{font-family:var(--font-display);font-size:clamp(20px,4vw,32px);font-weight:400;color:var(--text-secondary);letter-spacing:-0.01em;margin-bottom:48px}
+.hero-role span{color:var(--text-primary);font-weight:500}
+.hero-meta{display:flex;gap:48px;justify-content:center;flex-wrap:wrap;margin-bottom:64px}
+.hero-meta-item{text-align:center}
+.hero-meta-num{font-family:var(--font-display);font-size:clamp(32px,6vw,56px);font-weight:700;color:var(--text-primary);line-height:1;letter-spacing:-0.03em}
+.hero-meta-label{font-size:13px;color:var(--text-tertiary);margin-top:8px;letter-spacing:0.02em}
+.hero-scroll{position:absolute;bottom:40px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--text-tertiary);font-size:12px;letter-spacing:0.05em}
+.hero-scroll-line{width:1px;height:32px;background:linear-gradient(to bottom,transparent,var(--text-tertiary));animation:scrollHint 2s ease-in-out infinite}
+@keyframes scrollHint{0%,100%{opacity:0.3;transform:scaleY(0.5)}50%{opacity:1;transform:scaleY(1)}}
+.hero-bg{position:absolute;inset:0;z-index:0;opacity:0.4;background-image:radial-gradient(ellipse at top,rgba(255,255,255,0.04) 0%,transparent 60%),radial-gradient(ellipse at bottom,rgba(255,255,255,0.02) 0%,transparent 50%)}
 
-/* ===== About / Summary ===== */
-.about-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:var(--space-2xl);
-  align-items:start;
-}
-@media(max-width:768px){
-  .about-grid{grid-template-columns:1fr;gap:var(--space-lg)}
-}
-.about-text{
-  font-size:18px;
-  line-height:1.7;
-  color:var(--text-secondary);
-}
+.section{padding:var(--space-3xl) 24px;position:relative}
+.section-inner{max-width:1000px;margin:0 auto}
+.section-label{font-family:var(--font-mono);font-size:13px;color:var(--text-tertiary);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:24px;display:flex;align-items:center;gap:12px}
+.section-label::before{content:'';width:24px;height:1px;background:var(--text-tertiary)}
+.section-title{font-family:var(--font-display);font-size:clamp(32px,6vw,64px);font-weight:600;line-height:1.1;letter-spacing:-0.03em;color:var(--text-primary);margin-bottom:var(--space-xl);max-width:800px}
+
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-2xl);align-items:start}
+@media(max-width:768px){.about-grid{grid-template-columns:1fr;gap:var(--space-lg)}}
+.about-text{font-size:18px;line-height:1.7;color:var(--text-secondary)}
 .about-text p{margin-bottom:var(--space-md)}
 .about-text strong{color:var(--text-primary);font-weight:500}
-.about-highlight{
-  font-family:var(--font-display);
-  font-size:clamp(24px,4vw,40px);
-  font-weight:500;
-  line-height:1.3;
-  letter-spacing:-0.02em;
-  color:var(--text-primary);
-}
-.about-highlight em{
-  font-style:normal;
-  color:var(--text-tertiary);
-}
+.about-highlight{font-family:var(--font-display);font-size:clamp(24px,4vw,40px);font-weight:500;line-height:1.3;letter-spacing:-0.02em;color:var(--text-primary)}
+.about-highlight em{font-style:normal;color:var(--text-tertiary)}
 
-/* ===== Stats Row ===== */
-.stats{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:1px;
-  background:var(--border);
-  border:1px solid var(--border);
-  border-radius:var(--r-lg);
-  overflow:hidden;
-  margin-top:var(--space-2xl);
-}
-@media(max-width:768px){
-  .stats{grid-template-columns:repeat(2,1fr)}
-}
-.stat{
-  background:var(--bg);
-  padding:var(--space-lg) var(--space-md);
-  text-align:center;
-}
-.stat-num{
-  font-family:var(--font-display);
-  font-size:clamp(28px,5vw,48px);
-  font-weight:700;
-  color:var(--text-primary);
-  line-height:1;
-  letter-spacing:-0.03em;
-}
-.stat-num .unit{
-  font-size:0.5em;
-  color:var(--text-tertiary);
-  font-weight:400;
-}
-.stat-label{
-  font-size:13px;
-  color:var(--text-tertiary);
-  margin-top:12px;
-}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;margin-top:var(--space-2xl)}
+@media(max-width:768px){.stats{grid-template-columns:repeat(2,1fr)}}
+.stat{background:var(--bg);padding:var(--space-lg) var(--space-md);text-align:center}
+.stat-num{font-family:var(--font-display);font-size:clamp(28px,5vw,48px);font-weight:700;color:var(--text-primary);line-height:1;letter-spacing:-0.03em}
+.stat-num .unit{font-size:0.5em;color:var(--text-tertiary);font-weight:400}
+.stat-label{font-size:13px;color:var(--text-tertiary);margin-top:12px}
 
-/* ===== Experience Timeline ===== */
-.timeline{
-  position:relative;
-  padding-left:32px;
-}
-.timeline::before{
-  content:'';
-  position:absolute;
-  left:0;top:8px;bottom:8px;
-  width:1px;
-  background:var(--border);
-}
-.timeline-item{
-  position:relative;
-  padding-bottom:var(--space-2xl);
-}
+.timeline{position:relative;padding-left:32px}
+.timeline::before{content:'';position:absolute;left:0;top:8px;bottom:8px;width:1px;background:var(--border)}
+.timeline-item{position:relative;padding-bottom:var(--space-2xl)}
 .timeline-item:last-child{padding-bottom:0}
-.timeline-dot{
-  position:absolute;
-  left:-36px;top:6px;
-  width:9px;height:9px;
-  border-radius:50%;
-  background:var(--bg);
-  border:2px solid var(--text-tertiary);
-  transition:border-color 0.3s,background 0.3s;
-}
-.timeline-item:hover .timeline-dot{
-  border-color:var(--accent);
-  background:var(--accent);
-}
-.timeline-header{
-  display:flex;align-items:baseline;justify-content:space-between;
-  gap:var(--space-md);
-  margin-bottom:8px;
-  flex-wrap:wrap;
-}
-.timeline-company{
-  font-family:var(--font-display);
-  font-size:24px;font-weight:600;
-  color:var(--text-primary);
-  letter-spacing:-0.01em;
-}
-.timeline-role{
-  font-size:15px;
-  color:var(--text-secondary);
-  margin-bottom:4px;
-}
-.timeline-date{
-  font-family:var(--font-mono);
-  font-size:13px;
-  color:var(--text-tertiary);
-  white-space:nowrap;
-}
-.timeline-body{
-  font-size:16px;
-  line-height:1.7;
-  color:var(--text-secondary);
-  margin-top:16px;
-}
+.timeline-dot{position:absolute;left:-36px;top:6px;width:9px;height:9px;border-radius:50%;background:var(--bg);border:2px solid var(--text-tertiary);transition:border-color 0.3s,background 0.3s}
+.timeline-item:hover .timeline-dot{border-color:var(--accent);background:var(--accent)}
+.timeline-header{display:flex;align-items:baseline;justify-content:space-between;gap:var(--space-md);margin-bottom:8px;flex-wrap:wrap}
+.timeline-company{font-family:var(--font-display);font-size:24px;font-weight:600;color:var(--text-primary);letter-spacing:-0.01em}
+.timeline-role{font-size:15px;color:var(--text-secondary);margin-bottom:4px}
+.timeline-date{font-family:var(--font-mono);font-size:13px;color:var(--text-tertiary);white-space:nowrap}
+.timeline-body{font-size:16px;line-height:1.7;color:var(--text-secondary);margin-top:16px}
 .timeline-body p{margin-bottom:12px}
 .timeline-body strong{color:var(--text-primary);font-weight:500}
-.timeline-tags{
-  display:flex;gap:8px;flex-wrap:wrap;
-  margin-top:16px;
-}
-.tag{
-  font-family:var(--font-mono);
-  font-size:12px;
-  color:var(--text-secondary);
-  padding:4px 12px;
-  border:1px solid var(--border);
-  border-radius:var(--r-full);
-}
+.timeline-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.tag{font-family:var(--font-mono);font-size:12px;color:var(--text-secondary);padding:4px 12px;border:1px solid var(--border);border-radius:var(--r-full)}
 
-/* ===== Projects Grid ===== */
-.projects{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:1px;
-  background:var(--border);
-  border:1px solid var(--border);
-  border-radius:var(--r-lg);
-  overflow:hidden;
-}
-@media(max-width:768px){
-  .projects{grid-template-columns:1fr}
-}
-.project{
-  background:var(--bg);
-  padding:var(--space-xl) var(--space-lg);
-  transition:background 0.3s ease;
-  cursor:default;
-}
+.projects{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden}
+@media(max-width:768px){.projects{grid-template-columns:1fr}}
+.project{background:var(--bg);padding:var(--space-xl) var(--space-lg);transition:background 0.3s ease;cursor:default}
 .project:hover{background:var(--bg-elevated)}
-.project-num{
-  font-family:var(--font-mono);
-  font-size:13px;
-  color:var(--text-quaternary);
-  margin-bottom:16px;
-}
-.project-title{
-  font-family:var(--font-display);
-  font-size:24px;font-weight:600;
-  color:var(--text-primary);
-  letter-spacing:-0.01em;
-  margin-bottom:12px;
-}
-.project-desc{
-  font-size:15px;
-  line-height:1.7;
-  color:var(--text-secondary);
-  margin-bottom:20px;
-}
-.project-metrics{
-  display:flex;gap:24px;flex-wrap:wrap;
-  margin-bottom:16px;
-}
-.project-metric{
-  display:flex;flex-direction:column;
-}
-.project-metric-val{
-  font-family:var(--font-display);
-  font-size:28px;font-weight:700;
-  color:var(--text-primary);
-  line-height:1;
-  letter-spacing:-0.02em;
-}
-.project-metric-label{
-  font-size:12px;
-  color:var(--text-tertiary);
-  margin-top:6px;
-}
-.project-tags{
-  display:flex;gap:8px;flex-wrap:wrap;
-}
+.project-num{font-family:var(--font-mono);font-size:13px;color:var(--text-quaternary);margin-bottom:16px}
+.project-title{font-family:var(--font-display);font-size:24px;font-weight:600;color:var(--text-primary);letter-spacing:-0.01em;margin-bottom:12px}
+.project-desc{font-size:15px;line-height:1.7;color:var(--text-secondary);margin-bottom:20px}
+.project-metrics{display:flex;gap:24px;flex-wrap:wrap;margin-bottom:16px}
+.project-metric{display:flex;flex-direction:column}
+.project-metric-val{font-family:var(--font-display);font-size:28px;font-weight:700;color:var(--text-primary);line-height:1;letter-spacing:-0.02em}
+.project-metric-label{font-size:12px;color:var(--text-tertiary);margin-top:6px}
+.project-tags{display:flex;gap:8px;flex-wrap:wrap}
 
-/* ===== Skills ===== */
-.skills-grid{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:1px;
-  background:var(--border);
-  border:1px solid var(--border);
-  border-radius:var(--r-lg);
-  overflow:hidden;
-}
-@media(max-width:768px){
-  .skills-grid{grid-template-columns:repeat(2,1fr)}
-}
-.skill-cat{
-  background:var(--bg);
-  padding:var(--space-lg) var(--space-md);
-}
-.skill-cat-name{
-  font-family:var(--font-mono);
-  font-size:12px;
-  color:var(--text-tertiary);
-  letter-spacing:0.05em;
-  text-transform:uppercase;
-  margin-bottom:16px;
-}
-.skill-list{
-  list-style:none;
-  display:flex;flex-direction:column;gap:8px;
-}
-.skill-item{
-  font-size:15px;
-  color:var(--text-secondary);
-  line-height:1.5;
-}
+.skills-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden}
+@media(max-width:768px){.skills-grid{grid-template-columns:repeat(2,1fr)}}
+.skill-cat{background:var(--bg);padding:var(--space-lg) var(--space-md)}
+.skill-cat-name{font-family:var(--font-mono);font-size:12px;color:var(--text-tertiary);letter-spacing:0.05em;text-transform:uppercase;margin-bottom:16px}
+.skill-list{list-style:none;display:flex;flex-direction:column;gap:8px}
+.skill-item{font-size:15px;color:var(--text-secondary);line-height:1.5}
 
-/* ===== Education ===== */
-.edu-card{
-  border:1px solid var(--border);
-  border-radius:var(--r-lg);
-  padding:var(--space-xl) var(--space-lg);
-  display:flex;align-items:center;justify-content:space-between;
-  gap:var(--space-lg);
-  flex-wrap:wrap;
-}
-.edu-school{
-  font-family:var(--font-display);
-  font-size:28px;font-weight:600;
-  color:var(--text-primary);
-  letter-spacing:-0.01em;
-}
-.edu-major{
-  font-size:16px;
-  color:var(--text-secondary);
-  margin-top:8px;
-}
-.edu-meta{
-  display:flex;gap:32px;
-}
-.edu-meta-item{
-  text-align:right;
-}
-.edu-meta-val{
-  font-family:var(--font-display);
-  font-size:20px;font-weight:500;
-  color:var(--text-primary);
-}
-.edu-meta-label{
-  font-size:13px;
-  color:var(--text-tertiary);
-  margin-top:4px;
-}
+.edu-card{border:1px solid var(--border);border-radius:var(--r-lg);padding:var(--space-xl) var(--space-lg);display:flex;align-items:center;justify-content:space-between;gap:var(--space-lg);flex-wrap:wrap}
+.edu-school{font-family:var(--font-display);font-size:28px;font-weight:600;color:var(--text-primary);letter-spacing:-0.01em}
+.edu-major{font-size:16px;color:var(--text-secondary);margin-top:8px}
+.edu-meta-item{text-align:right}
+.edu-meta-val{font-family:var(--font-display);font-size:20px;font-weight:500;color:var(--text-primary)}
+.edu-meta-label{font-size:13px;color:var(--text-tertiary);margin-top:4px}
 
-/* ===== Contact / Footer ===== */
-.contact{
-  text-align:center;
-  padding:var(--space-3xl) 24px;
-  border-top:1px solid var(--border);
-}
-.contact-eyebrow{
-  font-family:var(--font-mono);
-  font-size:13px;
-  color:var(--text-tertiary);
-  letter-spacing:0.08em;
-  text-transform:uppercase;
-  margin-bottom:24px;
-}
-.contact-title{
-  font-family:var(--font-display);
-  font-size:clamp(36px,7vw,72px);
-  font-weight:600;
-  line-height:1.1;
-  letter-spacing:-0.03em;
-  color:var(--text-primary);
-  margin-bottom:48px;
-  max-width:800px;
-  margin-left:auto;margin-right:auto;
-}
-.contact-links{
-  display:flex;gap:24px;justify-content:center;flex-wrap:wrap;
-  margin-bottom:var(--space-2xl);
-}
-.contact-link{
-  display:flex;align-items:center;gap:10px;
-  font-size:16px;
-  color:var(--text-secondary);
-  text-decoration:none;
-  padding:12px 24px;
-  border:1px solid var(--border);
-  border-radius:var(--r-full);
-  transition:all 0.2s ease;
-}
-.contact-link:hover{
-  color:var(--text-primary);
-  border-color:var(--border-hover);
-  background:var(--bg-card);
-}
-.contact-link svg{
-  width:18px;height:18px;
-  flex-shrink:0;
-}
-.footer{
-  padding:32px 24px;
-  border-top:1px solid var(--border);
-  text-align:center;
-}
-.footer-text{
-  font-size:13px;
-  color:var(--text-quaternary);
-}
+.contact{text-align:center;padding:var(--space-3xl) 24px;border-top:1px solid var(--border)}
+.contact-eyebrow{font-family:var(--font-mono);font-size:13px;color:var(--text-tertiary);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:24px}
+.contact-title{font-family:var(--font-display);font-size:clamp(36px,7vw,72px);font-weight:600;line-height:1.1;letter-spacing:-0.03em;color:var(--text-primary);margin-bottom:48px;max-width:800px;margin-left:auto;margin-right:auto}
+.contact-links{display:flex;gap:24px;justify-content:center;flex-wrap:wrap;margin-bottom:var(--space-2xl)}
+.contact-link{display:flex;align-items:center;gap:10px;font-size:16px;color:var(--text-secondary);text-decoration:none;padding:12px 24px;border:1px solid var(--border);border-radius:var(--r-full);transition:all 0.2s ease}
+.contact-link:hover{color:var(--text-primary);border-color:var(--border-hover);background:var(--bg-card)}
+.contact-link svg{width:18px;height:18px;flex-shrink:0}
+.footer{padding:32px 24px;border-top:1px solid var(--border);text-align:center}
+.footer-text{font-size:13px;color:var(--text-quaternary)}
 
-/* ===== GSAP Reveal base (hidden until animated) ===== */
-.gsap-reveal{
-  opacity:0;
-}
-.gsap-reveal-y{
-  opacity:0;
-  transform:translateY(40px);
-}
+.gsap-reveal{opacity:0}
 
-/* ===== Mobile adjustments ===== */
 @media(max-width:640px){
   .section{padding:var(--space-2xl) 20px}
   .hero{padding:100px 20px 60px}
@@ -632,7 +210,6 @@ body{
 </head>
 <body class="no-js">
 
-<!-- ===== Navigation ===== -->
 <nav class="nav">
   <div class="nav-inner">
     <a href="#hero" class="nav-logo">医疗AI产品经理</a>
@@ -646,7 +223,6 @@ body{
   </div>
 </nav>
 
-<!-- ===== Hero ===== -->
 <section class="hero" id="hero">
   <div class="hero-bg"></div>
   <div class="hero-content">
@@ -677,7 +253,6 @@ body{
   </div>
 </section>
 
-<!-- ===== About / Summary ===== -->
 <section class="section" id="about">
   <div class="section-inner">
     <div class="section-label gsap-reveal">01 — 关于</div>
@@ -722,7 +297,6 @@ body{
   </div>
 </section>
 
-<!-- ===== Experience Timeline ===== -->
 <section class="section" id="experience">
   <div class="section-inner">
     <div class="section-label gsap-reveal">02 — 工作经历</div>
@@ -731,7 +305,6 @@ body{
     </h2>
 
     <div class="timeline">
-      <!-- Item 1 -->
       <div class="timeline-item gsap-reveal">
         <div class="timeline-dot"></div>
         <div class="timeline-header">
@@ -761,7 +334,6 @@ body{
         </div>
       </div>
 
-      <!-- Item 2 -->
       <div class="timeline-item gsap-reveal">
         <div class="timeline-dot"></div>
         <div class="timeline-header">
@@ -794,7 +366,6 @@ body{
   </div>
 </section>
 
-<!-- ===== Projects ===== -->
 <section class="section" id="projects">
   <div class="section-inner">
     <div class="section-label gsap-reveal">03 — 核心项目</div>
@@ -803,7 +374,6 @@ body{
     </h2>
 
     <div class="projects">
-      <!-- Project 1 -->
       <div class="project gsap-reveal">
         <div class="project-num">P01</div>
         <h3 class="project-title">讯飞医疗AI家医产品</h3>
@@ -827,7 +397,6 @@ body{
         </div>
       </div>
 
-      <!-- Project 2 -->
       <div class="project gsap-reveal">
         <div class="project-num">P02</div>
         <h3 class="project-title">腰突全病程管理商业化</h3>
@@ -851,7 +420,6 @@ body{
         </div>
       </div>
 
-      <!-- Project 3 -->
       <div class="project gsap-reveal">
         <div class="project-num">P03</div>
         <h3 class="project-title">NLP-L2医学引擎</h3>
@@ -871,7 +439,6 @@ body{
         </div>
       </div>
 
-      <!-- Project 4 -->
       <div class="project gsap-reveal">
         <div class="project-num">P04</div>
         <h3 class="project-title">申康宫颈癌数据集</h3>
@@ -894,7 +461,6 @@ body{
   </div>
 </section>
 
-<!-- ===== Skills ===== -->
 <section class="section" id="skills">
   <div class="section-inner">
     <div class="section-label gsap-reveal">04 — 能力矩阵</div>
@@ -951,7 +517,6 @@ body{
   </div>
 </section>
 
-<!-- ===== Education ===== -->
 <section class="section" id="education">
   <div class="section-inner">
     <div class="section-label gsap-reveal">05 — 教育</div>
@@ -963,17 +528,14 @@ body{
         <div class="edu-school">安徽中医药大学</div>
         <div class="edu-major">中西医结合临床 · 本科</div>
       </div>
-      <div class="edu-meta">
-        <div class="edu-meta-item">
-          <div class="edu-meta-val">2015 — 2020</div>
-          <div class="edu-meta-label">就读时间</div>
-        </div>
+      <div class="edu-meta-item">
+        <div class="edu-meta-val">2015 — 2020</div>
+        <div class="edu-meta-label">就读时间</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ===== Contact ===== -->
 <section class="contact" id="contact">
   <div class="contact-eyebrow gsap-reveal">06 — 联系</div>
   <h2 class="contact-title gsap-reveal">
@@ -990,160 +552,84 @@ body{
   </div>
 </section>
 
-<!-- ===== Footer ===== -->
 <footer class="footer">
   <p class="footer-text">© 2026 医疗AI产品经理 · 杭州</p>
 </footer>
 
 <script>
-// Remove no-js class — JS is running
 document.body.classList.remove('no-js');
 
-// Register GSAP plugins
-gsap.registerPlugin(ScrollTrigger);
+// GSAP 加载失败兜底：确保内容可见
+if (typeof gsap === 'undefined') {
+  document.querySelectorAll('.gsap-reveal').forEach(el => {
+    el.style.opacity = '1';
+    el.style.transform = 'none';
+  });
+} else {
 
+gsap.registerPlugin(ScrollTrigger);
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-// ===== Hero entrance — Apple-style char stagger =====
 if(!prefersReducedMotion){
-  // Split hero name into chars for stagger animation
   const heroName = document.getElementById('heroName');
   const text = heroName.textContent;
   heroName.innerHTML = '';
-  [...text].forEach((char, i) => {
+  [...text].forEach((char) => {
     const span = document.createElement('span');
     span.className = 'char';
     span.textContent = char === ' ' ? '\u00A0' : char;
     heroName.appendChild(span);
   });
 
-  // Hero timeline — chars rise in, then eyebrow/role/meta fade
   const heroTl = gsap.timeline({ delay: 0.3 });
   heroTl
     .from('.hero-eyebrow', { opacity: 0, y: 20, duration: 0.6, ease: 'power2.out' })
     .from('.hero-name .char', {
-      opacity: 0,
-      y: 60,
-      rotateX: -40,
-      duration: 0.8,
-      stagger: 0.08,
-      ease: 'expo.out'
+      opacity: 0, y: 60, rotateX: -40, duration: 0.8, stagger: 0.08, ease: 'expo.out'
     }, '-=0.3')
     .from('.hero-role', { opacity: 0, y: 30, duration: 0.7, ease: 'power2.out' }, '-=0.4')
     .from('.hero-meta', { opacity: 0, y: 30, duration: 0.7, ease: 'power2.out' }, '-=0.4')
     .from('.hero-scroll', { opacity: 0, duration: 0.8, ease: 'power2.out' }, '-=0.2');
 
-  // ===== Hero parallax — content drifts up slightly on scroll (Apple style) =====
   gsap.to('.hero-content', {
-    yPercent: -15,
-    opacity: 0.3,
-    ease: 'none',
-    scrollTrigger: {
-      trigger: '.hero',
-      start: 'top top',
-      end: 'bottom top',
-      scrub: 1
-    }
+    yPercent: -15, opacity: 0.3, ease: 'none',
+    scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 }
   });
 
-  // ===== Count-up animation for hero stats =====
   document.querySelectorAll('[data-count]').forEach(el => {
     const target = parseInt(el.dataset.count);
     const suffix = el.dataset.suffix || '';
-    ScrollTrigger.create({
-      trigger: el,
-      start: 'top 90%',
-      once: true,
-      onEnter: () => {
-        gsap.fromTo(el, { textContent: 0 }, {
-          textContent: target,
-          duration: 1.5,
-          ease: 'power2.out',
-          snap: { textContent: 1 },
-          onUpdate: function() {
-            el.textContent = Math.round(this.targets()[0].textContent) + suffix;
-          }
-        });
-      }
+    const obj = { val: 0 };
+    gsap.to(obj, {
+      val: target, duration: 1.5, ease: 'power2.out', delay: 0.5,
+      onUpdate: function() { el.textContent = Math.round(obj.val) + suffix; }
     });
   });
 
-  // ===== Scroll reveals — subtle fade + rise (ui-ux-pro-max: Scroll Reveal Subtle) =====
   gsap.utils.toArray('.gsap-reveal').forEach(el => {
-    gsap.fromTo(el, {
-      opacity: 0,
-      y: 40
-    }, {
-      opacity: 1,
-      y: 0,
-      duration: 0.7,
-      ease: 'power2.out',
-      scrollTrigger: {
-        trigger: el,
-        start: 'top 88%',
-        toggleActions: 'play none none reverse'
-      }
-    });
-  });
-
-  // ===== Timeline items stagger =====
-  gsap.utils.toArray('.timeline-item').forEach(item => {
-    gsap.from(item, {
-      opacity: 0,
-      x: -30,
-      duration: 0.6,
-      ease: 'power2.out',
-      scrollTrigger: {
-        trigger: item,
-        start: 'top 85%'
-      }
-    });
-  });
-
-  // ===== Section titles — slightly larger reveal =====
-  gsap.utils.toArray('.section-title').forEach(title => {
-    gsap.fromTo(title, {
-      opacity: 0,
-      y: 50
-    }, {
-      opacity: 1,
-      y: 0,
-      duration: 0.9,
-      ease: 'power3.out',
-      scrollTrigger: {
-        trigger: title,
-        start: 'top 85%',
-        toggleActions: 'play none none reverse'
-      }
+    if(el.closest('.hero')) return;
+    gsap.fromTo(el, { opacity: 0, y: 40 }, {
+      opacity: 1, y: 0, duration: 0.7, ease: 'power2.out',
+      scrollTrigger: { trigger: el, start: 'top 88%', toggleActions: 'play none none reverse' }
     });
   });
 
 } else {
-  // Reduced motion — make everything visible immediately
   document.querySelectorAll('.gsap-reveal').forEach(el => {
     el.style.opacity = '1';
     el.style.transform = 'none';
   });
 }
 
-// ===== Nav shrink on scroll =====
+} // end of GSAP loaded else
+
 const nav = document.querySelector('.nav');
-let lastScroll = 0;
 window.addEventListener('scroll', () => {
-  const scroll = window.pageYOffset;
-  if(scroll > 50){
-    nav.style.padding = '10px 24px';
-  } else {
-    nav.style.padding = '16px 24px';
-  }
-  lastScroll = scroll;
+  nav.style.padding = window.pageYOffset > 50 ? '10px 24px' : '16px 24px';
 }, { passive: true });
 
-// ===== Refresh ScrollTrigger after fonts load =====
 if(document.fonts){
-  document.fonts.ready.then(() => {
-    ScrollTrigger.refresh();
-  });
+  document.fonts.ready.then(() => { ScrollTrigger.refresh(); });
 }
 </script>
 
