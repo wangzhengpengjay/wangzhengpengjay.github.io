@@ -581,18 +581,20 @@ if(!prefersReducedMotion){
     heroName.appendChild(span);
   });
 
-  const heroTl = gsap.timeline({ delay: 0.3 });
+  const heroTl = gsap.timeline({ delay: 0.15 });
   heroTl
-    .from('.hero-eyebrow', { opacity: 0, y: 20, duration: 0.6, ease: 'power2.out' })
-    .from('.hero-name .char', {
-      opacity: 0, y: 60, rotateX: -40, duration: 0.8, stagger: 0.08, ease: 'expo.out'
-    }, '-=0.3')
-    .from('.hero-role', { opacity: 0, y: 30, duration: 0.7, ease: 'power2.out' }, '-=0.4')
-    .from('.hero-meta', { opacity: 0, y: 30, duration: 0.7, ease: 'power2.out' }, '-=0.4')
-    .from('.hero-scroll', { opacity: 0, duration: 0.8, ease: 'power2.out' }, '-=0.2');
+    .fromTo('.hero-eyebrow', { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' })
+    .fromTo('.hero-name .char', {
+      opacity: 0, y: 40, rotateX: -30
+    }, {
+      opacity: 1, y: 0, rotateX: 0, duration: 0.6, stagger: 0.04, ease: 'expo.out'
+    }, '-=0.2')
+    .fromTo('.hero-role', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, '-=0.3')
+    .fromTo('.hero-meta', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }, '-=0.3')
+    .fromTo('.hero-scroll', { opacity: 0 }, { opacity: 1, duration: 0.5, ease: 'power2.out' }, '-=0.2');
 
   gsap.to('.hero-content', {
-    yPercent: -15, opacity: 0.3, ease: 'none',
+    yPercent: -10, opacity: 0.6, ease: 'none',
     scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 }
   });
 
