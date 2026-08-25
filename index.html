@@ -217,6 +217,8 @@ body{
       <a href="#about" class="nav-link">关于</a>
       <a href="#experience" class="nav-link">经历</a>
       <a href="#projects" class="nav-link">项目</a>
+      <a href="#opensource" class="nav-link">开源</a>
+      <a href="#exploring" class="nav-link">探索</a>
       <a href="#skills" class="nav-link">能力</a>
       <a href="#contact" class="nav-link nav-cta">联系我</a>
     </div>
@@ -230,7 +232,7 @@ body{
     <h1 class="hero-name" id="heroName">让AI真正落地医疗场景</h1>
     <p class="hero-role gsap-reveal">
       <span>临床医学</span>背景，<span>AI大模型</span>驱动的<br>
-      医疗健康产品从0到1构建者
+      医疗健康产品构建者 · 独立开源开发者
     </p>
     <div class="hero-meta gsap-reveal">
       <div class="hero-meta-item">
@@ -286,12 +288,12 @@ body{
         <div class="stat-label">AI咨询量</div>
       </div>
       <div class="stat">
-        <div class="stat-num">800<span class="unit">+</span></div>
-        <div class="stat-label">覆盖区县</div>
+        <div class="stat-num">1<span class="unit">个</span></div>
+        <div class="stat-label">开源项目（MIT）</div>
       </div>
       <div class="stat">
-        <div class="stat-num">2600<span class="unit">+</span></div>
-        <div class="stat-label">覆盖疾病</div>
+        <div class="stat-num">120<span class="unit">+</span></div>
+        <div class="stat-label">单元测试</div>
       </div>
     </div>
   </div>
@@ -461,11 +463,87 @@ body{
   </div>
 </section>
 
+<section class="section" id="opensource">
+  <div class="section-inner">
+    <div class="section-label gsap-reveal">04 — 独立项目</div>
+    <h2 class="section-title gsap-reveal">
+      从产品经理<br>到全栈开发者
+    </h2>
+
+    <div class="projects">
+      <div class="project gsap-reveal" style="grid-column:1/-1">
+        <div class="project-num">P05 · 独立开源</div>
+        <h3 class="project-title">AI Health Steward · 本地AI健康管家</h3>
+        <p class="project-desc">
+          开源、可私有化部署的家庭 AI 健康管家。通过多模态大模型将健康数据结构化为人维度画像，提供可视化看板与 AI 咨询能力，支持飞书等渠道的资料收集与轻问答。从 PRD 到前后端开发到部署，独立完成全部产品与技术落地。
+        </p>
+        <div class="project-metrics">
+          <div class="project-metric">
+            <div class="project-metric-val">20+</div>
+            <div class="project-metric-label">核心功能</div>
+          </div>
+          <div class="project-metric">
+            <div class="project-metric-val">120+</div>
+            <div class="project-metric-label">单元测试</div>
+          </div>
+          <div class="project-metric">
+            <div class="project-metric-val">V1.2</div>
+            <div class="project-metric-label">当前版本</div>
+          </div>
+          <div class="project-metric">
+            <div class="project-metric-val">MIT</div>
+            <div class="project-metric-label">开源协议</div>
+          </div>
+        </div>
+        <div class="project-tags">
+          <span class="tag">Python FastAPI</span>
+          <span class="tag">React 18</span>
+          <span class="tag">PostgreSQL + pgvector</span>
+          <span class="tag">Docker</span>
+          <span class="tag">多模态AI</span>
+          <span class="tag">RAG</span>
+        </div>
+        <div style="margin-top:20px;display:flex;gap:12px;flex-wrap:wrap">
+          <a href="https://github.com/wangzhengpengjay/AI-Health-Steward" class="nav-link nav-cta" style="text-decoration:none">GitHub 仓库</a>
+          <a href="https://wangzhengpengjay.github.io/AI-Health-Steward/" class="nav-link" style="text-decoration:none;border:1px solid var(--border);padding:8px 18px;border-radius:var(--r-full)">在线介绍</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="exploring">
+  <div class="section-inner">
+    <div class="section-label gsap-reveal">05 — 正在探索</div>
+    <h2 class="section-title gsap-reveal">
+      从被动问答<br>到主动健康管理
+    </h2>
+    <div class="about-grid">
+      <div class="about-text gsap-reveal">
+        <p>
+          AI 健康管理的下一个战场不在"问答层"，而在<strong>"行动层"</strong>——看懂画像、做出决策、推动执行、追踪反馈的完整闭环。
+        </p>
+        <p>
+          基于 <strong>JITAI</strong>（何时干预）、<strong>TTM</strong>（说什么）、<strong>Nudge</strong>（怎么说）三大行为改变理论，构建从画像层到行动层的主动健康服务闭环。
+        </p>
+        <p>
+          目标：打造<strong>家庭健康决策中枢</strong>——家庭视角 + 本地私有化 + 开源，大厂的制度盲区。
+        </p>
+      </div>
+      <div class="about-highlight gsap-reveal">
+        <em>画像层</em>（已完成 V1.2）<br>
+        <em>行动层</em>（正在设计）<br>
+        <em>生态层</em>（远期）
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="section" id="skills">
   <div class="section-inner">
-    <div class="section-label gsap-reveal">04 — 能力矩阵</div>
+    <div class="section-label gsap-reveal">06 — 能力矩阵</div>
     <h2 class="section-title gsap-reveal">
-      产品 × 医学 × AI<br>三维能力交叉
+      产品 × 医学 × AI × 工程<br>四维能力交叉
     </h2>
 
     <div class="skills-grid">
@@ -499,18 +577,18 @@ body{
           <li class="skill-item">对话效果评估与优化</li>
           <li class="skill-item">知识图谱构建</li>
           <li class="skill-item">NLP训练数据建设</li>
+          <li class="skill-item">RAG 语义检索</li>
         </ul>
       </div>
       <div class="skill-cat gsap-reveal">
-        <div class="skill-cat-name">工具</div>
+        <div class="skill-cat-name">技术栈 & 工具</div>
         <ul class="skill-list">
-          <li class="skill-item">Figma</li>
-          <li class="skill-item">XMind</li>
-          <li class="skill-item">SQL</li>
-          <li class="skill-item">Git</li>
-          <li class="skill-item">Codex</li>
-          <li class="skill-item">Claude Code</li>
-          <li class="skill-item">OpenCode</li>
+          <li class="skill-item">Python · FastAPI</li>
+          <li class="skill-item">React · TypeScript</li>
+          <li class="skill-item">PostgreSQL · Docker</li>
+          <li class="skill-item">Git · Figma · SQL</li>
+          <li class="skill-item">Claude Code · Codex</li>
+          <li class="skill-item">AI辅助全栈开发</li>
         </ul>
       </div>
     </div>
@@ -519,7 +597,7 @@ body{
 
 <section class="section" id="education">
   <div class="section-inner">
-    <div class="section-label gsap-reveal">05 — 教育</div>
+    <div class="section-label gsap-reveal">07 — 教育</div>
     <h2 class="section-title gsap-reveal">
       临床医学<br>中西医结合
     </h2>
@@ -537,7 +615,7 @@ body{
 </section>
 
 <section class="contact" id="contact">
-  <div class="contact-eyebrow gsap-reveal">06 — 联系</div>
+  <div class="contact-eyebrow gsap-reveal">08 — 联系</div>
   <h2 class="contact-title gsap-reveal">
     让AI真正落地<br>医疗场景
   </h2>
