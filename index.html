@@ -196,6 +196,141 @@ body{
 .footer{padding:32px 24px;border-top:1px solid var(--border);text-align:center}
 .footer-text{font-size:13px;color:var(--text-quaternary)}
 
+/* === 技能雷达图 === */
+.radar-wrap{
+  display:grid;grid-template-columns:1fr 1fr;gap:var(--space-2xl);align-items:center;margin-top:var(--space-xl);
+}
+@media(max-width:768px){.radar-wrap{grid-template-columns:1fr}}
+.radar-canvas-wrap{
+  position:relative;display:flex;justify-content:center;
+}
+.radar-canvas-wrap canvas{
+  width:320px;height:320px;max-width:100%;
+}
+.radar-legend{
+  display:flex;flex-direction:column;gap:16px;
+}
+.radar-legend-item{
+  display:flex;align-items:center;gap:12px;
+}
+.radar-legend-dot{
+  width:8px;height:8px;border-radius:50%;flex-shrink:0;
+}
+.radar-legend-label{font-size:14px;color:var(--text-secondary);font-weight:500}
+.radar-legend-val{font-size:13px;color:var(--text-tertiary);margin-left:auto}
+
+/* === 悬浮 AI 助手 === */
+.ai-fab{
+  position:fixed;bottom:24px;right:24px;width:48px;height:48px;
+  border-radius:50%;background:var(--accent);border:none;cursor:pointer;
+  z-index:150;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 20px rgba(255,255,255,0.15);transition:transform 0.3s ease,box-shadow 0.3s ease;
+}
+.ai-fab:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(255,255,255,0.25)}
+.ai-fab svg{width:22px;height:22px;color:var(--bg)}
+.ai-fab.active{transform:rotate(135deg)}
+.ai-panel{
+  position:fixed;bottom:84px;right:24px;width:340px;max-width:calc(100vw - 48px);
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-lg);
+  z-index:150;overflow:hidden;opacity:0;transform:translateY(12px) scale(0.95);
+  pointer-events:none;transition:opacity 0.3s ease,transform 0.3s ease;
+  box-shadow:0 12px 48px rgba(0,0,0,0.4);
+}
+.ai-panel.open{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+.ai-panel-header{
+  padding:16px 20px;border-bottom:1px solid var(--border);
+  font-family:var(--font-mono);font-size:13px;color:var(--text-tertiary);letter-spacing:0.05em;
+}
+.ai-questions{padding:8px}
+.ai-question{
+  display:block;width:100%;text-align:left;padding:12px 16px;
+  background:none;border:none;cursor:pointer;border-radius:var(--r-md);
+  font-size:14px;color:var(--text-secondary);transition:background 0.2s,color 0.2s;
+}
+.ai-question:hover{background:var(--bg-elevated);color:var(--text-primary)}
+.ai-answer{
+  padding:16px 20px;font-size:14px;line-height:1.6;color:var(--text-secondary);
+  display:none;border-top:1px solid var(--border);max-height:300px;overflow-y:auto;
+}
+.ai-answer.visible{display:block}
+.ai-answer .typing-cursor{
+  display:inline-block;width:2px;height:14px;background:var(--accent);margin-left:2px;
+  animation:blink 0.8s infinite;vertical-align:middle;
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.ai-back{
+  padding:8px 16px 12px;display:block;font-size:13px;color:var(--text-tertiary);
+  background:none;border:none;cursor:pointer;text-align:left;
+}
+.ai-back:hover{color:var(--text-primary)}
+
+/* === 分享卡片 === */
+.share-fab{
+  position:fixed;bottom:24px;right:80px;width:48px;height:48px;
+  border-radius:50%;background:var(--bg-card);border:1px solid var(--border);
+  cursor:pointer;z-index:150;display:flex;align-items:center;justify-content:center;
+  transition:transform 0.3s ease,border-color 0.3s ease;
+}
+.share-fab:hover{transform:scale(1.08);border-color:var(--border-hover)}
+.share-fab svg{width:20px;height:20px;color:var(--text-secondary)}
+.share-modal{
+  position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:200;
+  display:flex;align-items:center;justify-content:center;padding:24px;
+  opacity:0;pointer-events:none;transition:opacity 0.3s ease;
+}
+.share-modal.open{opacity:1;pointer-events:auto}
+.share-card-img{
+  border-radius:var(--r-lg);max-width:380px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,0.5);
+}
+/* HTML 分享卡片 */
+.share-card-html{
+  width:340px;background:var(--bg-card);border:1px solid var(--border);
+  border-radius:var(--r-lg);padding:32px 28px;text-align:center;
+  box-shadow:0 20px 60px rgba(0,0,0,0.5);
+}
+.share-card-avatar{
+  width:80px;height:80px;border-radius:50%;object-fit:cover;
+  border:1px solid var(--border);margin-bottom:16px;
+}
+.share-card-name{
+  font-family:var(--font-display);font-size:28px;font-weight:700;
+  color:var(--text-primary);letter-spacing:0.02em;
+}
+.share-card-role{
+  font-size:14px;color:var(--text-tertiary);margin-top:6px;
+}
+.share-card-divider{
+  height:1px;background:var(--border);margin:20px 0;
+}
+.share-card-list{
+  list-style:none;text-align:left;padding:0;margin:0;
+}
+.share-card-list li{
+  font-size:14px;color:var(--text-secondary);line-height:2;
+}
+.share-card-bottom{
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+}
+.share-card-qr{
+  width:72px;height:72px;border-radius:var(--r-md);
+}
+.share-card-url{
+  font-family:var(--font-mono);font-size:12px;color:var(--text-quaternary);
+}
+.share-close{
+  position:fixed;top:20px;right:20px;width:36px;height:36px;border-radius:50%;
+  background:var(--bg-card);border:1px solid var(--border);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;color:var(--text-secondary);
+  z-index:201;
+}
+.share-close:hover{color:var(--text-primary)}
+.share-download{
+  display:block;margin:16px auto 0;padding:10px 28px;border-radius:var(--r-full);
+  background:var(--accent);color:var(--bg);font-size:14px;font-weight:500;text-align:center;
+  text-decoration:none;border:none;cursor:pointer;transition:opacity 0.2s,transform 0.2s;
+}
+.share-download:hover{opacity:0.85;transform:scale(0.98)}
+
 .gsap-reveal{opacity:0}
 
 @media(max-width:640px){
@@ -605,6 +740,34 @@ body{
       产品 × 医学 × AI × 工程<br>四维能力交叉
     </h2>
 
+    <div class="radar-wrap gsap-reveal">
+      <div class="radar-canvas-wrap">
+        <canvas id="radarChart" width="320" height="320"></canvas>
+      </div>
+      <div class="radar-legend">
+        <div class="radar-legend-item">
+          <span class="radar-legend-dot" style="background:#e0e0e0"></span>
+          <span class="radar-legend-label">产品能力</span>
+          <span class="radar-legend-val">5年从0到1经验</span>
+        </div>
+        <div class="radar-legend-item">
+          <span class="radar-legend-dot" style="background:#b0b0b0"></span>
+          <span class="radar-legend-label">行业知识</span>
+          <span class="radar-legend-val">临床医学·中西医结合</span>
+        </div>
+        <div class="radar-legend-item">
+          <span class="radar-legend-dot" style="background:#808080"></span>
+          <span class="radar-legend-label">AI应用</span>
+          <span class="radar-legend-val">大模型产品设计·RAG</span>
+        </div>
+        <div class="radar-legend-item">
+          <span class="radar-legend-dot" style="background:#ffffff"></span>
+          <span class="radar-legend-label">工程能力</span>
+          <span class="radar-legend-val">全栈开发·AI辅助开发</span>
+        </div>
+      </div>
+    </div>
+
     <div class="skills-grid">
       <div class="skill-cat gsap-reveal">
         <div class="skill-cat-name">产品能力</div>
@@ -690,6 +853,66 @@ body{
 <footer class="footer">
   <p class="footer-text">© 2026 医疗AI产品经理</p>
 </footer>
+
+<!-- AI 助手 -->
+<button class="ai-fab" id="aiFab" aria-label="AI助手">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 2L13.5 8.5L20 10L13.5 11.5L12 18L10.5 11.5L4 10L10.5 8.5Z"/>
+    <path d="M19 3v4M21 5h-4"/>
+    <circle cx="12" cy="20" r="1" fill="currentColor"/>
+  </svg>
+</button>
+<div class="ai-panel" id="aiPanel">
+  <div class="ai-panel-header">AI 助手 · 快速了解</div>
+  <div id="aiQuestions" class="ai-questions">
+    <button class="ai-question" data-idx="0">你的核心优势是什么？</button>
+    <button class="ai-question" data-idx="1">AI Health Steward 是什么？</button>
+    <button class="ai-question" data-idx="2">你做过最有挑战的项目？</button>
+    <button class="ai-question" data-idx="3">如何联系你？</button>
+  </div>
+  <div class="ai-answer" id="aiAnswer"></div>
+  <button class="ai-back" id="aiBack" style="display:none">← 返回问题列表</button>
+</div>
+
+<!-- 分享卡片 -->
+<button class="share-fab" id="shareFab" aria-label="分享">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="18" cy="5" r="3"/>
+    <circle cx="6" cy="12" r="3"/>
+    <circle cx="18" cy="19" r="3"/>
+    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+  </svg>
+</button>
+<div class="share-modal" id="shareModal">
+  <button class="share-close" id="shareClose">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px">
+      <line x1="18" y1="6" x2="6" y2="18"/>
+      <line x1="6" y1="6" x2="18" y2="18"/>
+    </svg>
+  </button>
+  <div>
+    <div class="share-card-html" id="shareCardHtml">
+      <img class="share-card-avatar" src="avatar.jpg" alt="头像">
+      <div class="share-card-name">王正鹏</div>
+      <div class="share-card-role">医疗AI产品经理 · 独立开源开发者</div>
+      <div class="share-card-divider"></div>
+      <ul class="share-card-list">
+        <li>5年医疗AI产品经验，临床医学背景</li>
+        <li>负责讯飞AI家医产品从0到1</li>
+        <li>高风险识别率96%，对话效果↑10%+</li>
+        <li>开源项目 AI Health Steward (MIT)</li>
+        <li>3000万+产品下载量</li>
+      </ul>
+      <div class="share-card-divider"></div>
+      <div class="share-card-bottom">
+        <img class="share-card-qr" id="shareQrImg" alt="二维码">
+        <div class="share-card-url">wangzhengpengjay.github.io</div>
+      </div>
+    </div>
+    <button class="share-download" id="shareDownload">下载图片</button>
+  </div>
+</div>
 
 <script>
 document.body.classList.remove('no-js');
@@ -845,6 +1068,253 @@ if(contactLink && !prefersReducedMotion){
 if(document.fonts){
   document.fonts.ready.then(() => { ScrollTrigger.refresh(); });
 }
+
+// === 技能雷达图 ===
+;(function(){
+  const canvas = document.getElementById('radarChart');
+  if(!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = 320, H = 320;
+  const cx = W/2, cy = H/2;
+  const R = 110;
+  const labels = ['产品能力','行业知识','AI应用','工程能力'];
+  const values = [0.90, 0.88, 0.82, 0.70]; // 0-1
+  const sides = labels.length;
+  let progress = 0;
+  let animId = null;
+
+  function draw(p){
+    ctx.clearRect(0,0,W,H);
+    // 背景网格
+    for(let lv=1; lv<=4; lv++){
+      const r = (R/4)*lv;
+      ctx.beginPath();
+      for(let i=0;i<sides;i++){
+        const angle = -Math.PI/2 + (Math.PI*2/sides)*i;
+        const x = cx + Math.cos(angle)*r;
+        const y = cy + Math.sin(angle)*r;
+        if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+      }
+      ctx.closePath();
+      ctx.strokeStyle = lv===4 ? 'rgba(255,255,255,0.15)' : 'rgba(255,255,255,0.06)';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+    // 轴线
+    for(let i=0;i<sides;i++){
+      const angle = -Math.PI/2 + (Math.PI*2/sides)*i;
+      ctx.beginPath();
+      ctx.moveTo(cx,cy);
+      ctx.lineTo(cx+Math.cos(angle)*R, cy+Math.sin(angle)*R);
+      ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+      ctx.stroke();
+    }
+    // 数据多边形
+    ctx.beginPath();
+    for(let i=0;i<sides;i++){
+      const angle = -Math.PI/2 + (Math.PI*2/sides)*i;
+      const r = R * values[i] * p;
+      const x = cx + Math.cos(angle)*r;
+      const y = cy + Math.sin(angle)*r;
+      if(i===0) ctx.moveTo(x,y); else ctx.lineTo(x,y);
+    }
+    ctx.closePath();
+    ctx.fillStyle = 'rgba(255,255,255,0.08)';
+    ctx.fill();
+    ctx.strokeStyle = 'rgba(255,255,255,0.4)';
+    ctx.lineWidth = 1.5;
+    ctx.stroke();
+    // 顶点圆点
+    for(let i=0;i<sides;i++){
+      const angle = -Math.PI/2 + (Math.PI*2/sides)*i;
+      const r = R * values[i] * p;
+      const x = cx + Math.cos(angle)*r;
+      const y = cy + Math.sin(angle)*r;
+      ctx.beginPath();
+      ctx.arc(x,y,3,0,Math.PI*2);
+      ctx.fillStyle = 'rgba(255,255,255,0.6)';
+      ctx.fill();
+    }
+    // 标签
+    ctx.font = '13px var(--font-mono)';
+    ctx.fillStyle = 'rgba(255,255,255,0.4)';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    for(let i=0;i<sides;i++){
+      const angle = -Math.PI/2 + (Math.PI*2/sides)*i;
+      const lx = cx + Math.cos(angle)*(R+24);
+      const ly = cy + Math.sin(angle)*(R+24);
+      ctx.fillText(labels[i], lx, ly);
+    }
+  }
+
+  function animate(){
+    progress += 0.03;
+    if(progress > 1) progress = 1;
+    draw(progress);
+    if(progress < 1) animId = requestAnimationFrame(animate);
+  }
+
+  // 初次绘制空图
+  draw(0);
+
+  // 滚入视野后动画
+  const radarObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting && !animId){
+        animate();
+        radarObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  radarObserver.observe(canvas);
+})();
+
+// === 悬浮 AI 助手 ===
+;(function(){
+  const fab = document.getElementById('aiFab');
+  const panel = document.getElementById('aiPanel');
+  const questions = document.getElementById('aiQuestions');
+  const answer = document.getElementById('aiAnswer');
+  const backBtn = document.getElementById('aiBack');
+
+  const qaData = [
+    '临床医学（中西医结合）背景，5年医疗AI产品经验。核心优势是“医学 × AI × 产品”的交叉能力——能读临床数据、能设計AI逻辑、能推商业化验证。同时具备独立全栈开发能力（AI Health Steward 项目），可快速验证产品想法。',
+    'AI Health Steward 是一个开源、可私有化部署的家庭 AI 健康管家。通过多模态大模型将健康数据结构化为人维度画像，提供可视化看板与 AI 咨询能力。当前 V1.2，120+单元测试，MIT 协议。从 PRD 到前后端开发到部署，独立完成全部产品与技术落地。',
+    '讯飞医疗 AI 家医产品（BGC项目）。从0到1负责产品逻辑设计，识别基层家医服务核心矛盾，设计“AI管基础+康复、医生管重点”的分层协同机制。覆盖智能问诊-报告解读-健康管理完整闭环，高风险识别率优化至96%，重点场景对话效果提升10%+。',
+    '邮箱：wangzhengpengjay@outlook.com\nGitHub：github.com/wangzhengpengjay\n网站：wangzhengpengjay.github.io'
+  ];
+
+  let typingTimer = null;
+
+  fab.addEventListener('click', () => {
+    const isOpen = panel.classList.toggle('open');
+    fab.classList.toggle('active', isOpen);
+  });
+
+  function typeWriter(text, el){
+    clearInterval(typingTimer);
+    el.innerHTML = '<span class="typing-cursor"></span>';
+    let i = 0;
+    typingTimer = setInterval(() => {
+      if(i < text.length){
+        el.innerHTML = text.slice(0, i+1) + '<span class="typing-cursor"></span>';
+        i++;
+      } else {
+        clearInterval(typingTimer);
+        el.innerHTML = text;
+      }
+    }, 25);
+  }
+
+  questions.querySelectorAll('.ai-question').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const idx = parseInt(btn.dataset.idx);
+      questions.style.display = 'none';
+      answer.classList.add('visible');
+      backBtn.style.display = 'block';
+      typeWriter(qaData[idx], answer);
+    });
+  });
+
+  backBtn.addEventListener('click', () => {
+    clearInterval(typingTimer);
+    answer.classList.remove('visible');
+    answer.innerHTML = '';
+    questions.style.display = 'block';
+    backBtn.style.display = 'none';
+  });
+})();
+
+// === 分享卡片 ===
+;(function(){
+  const fab = document.getElementById('shareFab');
+  const modal = document.getElementById('shareModal');
+  const close = document.getElementById('shareClose');
+  const dl = document.getElementById('shareDownload');
+  const qrImg = document.getElementById('shareQrImg');
+  let qrLoaded = false;
+
+  function loadQR(){
+    if(qrLoaded) return;
+    qrImg.onload = () => { qrLoaded = true; };
+    qrImg.src = 'https://api.qrserver.com/v1/create-qr-code/?size=120x120&margin=2&data=https://wangzhengpengjay.github.io';
+  }
+
+  fab.addEventListener('click', () => {
+    loadQR();
+    modal.classList.add('open');
+  });
+  close.addEventListener('click', () => modal.classList.remove('open'));
+  modal.addEventListener('click', (e) => {
+    if(e.target === modal) modal.classList.remove('open');
+  });
+
+  dl.addEventListener('click', () => {
+    const W = 340, H = 480;
+    const canvas = document.createElement('canvas');
+    canvas.width = W * 2; canvas.height = H * 2;
+    const ctx = canvas.getContext('2d');
+    ctx.scale(2, 2);
+    ctx.fillStyle = '#0a0a0a';
+    ctx.fillRect(0, 0, W, H);
+
+    const avatar = new Image();
+    avatar.onload = function(){
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(W/2, 48, 40, 0, Math.PI*2);
+      ctx.clip();
+      ctx.drawImage(avatar, W/2 - 40, 8, 80, 80);
+      ctx.restore();
+      drawText();
+    };
+    avatar.onerror = drawText;
+    avatar.src = 'avatar.jpg';
+
+    function drawText(){
+      ctx.fillStyle = '#f5f5f7';
+      ctx.font = 'bold 28px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('王正鹏', W/2, 116);
+      ctx.fillStyle = '#666';
+      ctx.font = '14px sans-serif';
+      ctx.fillText('医疗AI产品经理 · 独立开源开发者', W/2, 138);
+      ctx.strokeStyle = '#1a1a1a';
+      ctx.beginPath();
+      ctx.moveTo(40, 160); ctx.lineTo(W-40, 160); ctx.stroke();
+      ctx.fillStyle = '#aaa';
+      ctx.font = '14px sans-serif';
+      ctx.textAlign = 'left';
+      const lines = [
+        '· 5年医疗AI产品经验，临床医学背景',
+        '· 负责讯飞AI家医产品从0到1',
+        '· 高风险识别率96%，对话效果↑10%+',
+        '· 开源项目 AI Health Steward (MIT)',
+        '· 3000万+产品下载量',
+      ];
+      lines.forEach((line, i) => ctx.fillText(line, 40, 192 + i*28));
+      ctx.strokeStyle = '#1a1a1a';
+      ctx.beginPath();
+      ctx.moveTo(40, 340); ctx.lineTo(W-40, 340); ctx.stroke();
+      if(qrImg.complete && qrImg.naturalWidth > 0){
+        ctx.drawImage(qrImg, W/2 - 36, 360, 72, 72);
+      }
+      ctx.fillStyle = '#444';
+      ctx.font = '12px monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText('wangzhengpengjay.github.io', W/2, 456);
+      try {
+        const a = document.createElement('a');
+        a.href = canvas.toDataURL('image/png');
+        a.download = '王正鹏-医疗AI产品经理.png';
+        a.click();
+      } catch(e){
+        alert('下载失败，请截图保存');
+      }
+    }
+  });
+})();
 </script>
 
 </body>
