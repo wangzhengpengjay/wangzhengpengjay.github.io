@@ -122,6 +122,105 @@ body{
 @keyframes scrollHint{0%,100%{opacity:0.3;transform:scaleY(0.5)}50%{opacity:1;transform:scaleY(1)}}
 .hero-bg{position:absolute;inset:0;z-index:0;opacity:0.4;background-image:radial-gradient(ellipse at top,rgba(255,255,255,0.04) 0%,transparent 60%),radial-gradient(ellipse at bottom,rgba(255,255,255,0.02) 0%,transparent 50%)}
 
+/* === 巨构废墟背景 === */
+.ruins-bg{
+  position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;
+}
+/* 远景：微弱冷光地平线（废墟日出感）*/
+.ruins-horizon{
+  position:absolute;bottom:0;left:0;right:0;height:50%;
+  background:linear-gradient(to top,
+    rgba(20,22,30,0.6) 0%,
+    rgba(15,17,25,0.3) 30%,
+    transparent 70%);
+}
+.ruins-horizon::before{
+  content:'';position:absolute;bottom:38%;left:50%;transform:translateX(-50%);
+  width:120%;height:1px;
+  background:linear-gradient(to right,transparent,rgba(80,90,120,0.15) 30%,rgba(100,110,140,0.2) 50%,rgba(80,90,120,0.15) 70%,transparent);
+  filter:blur(0.5px);
+}
+.ruins-horizon::after{
+  content:'';position:absolute;bottom:37%;left:50%;transform:translateX(-50%);
+  width:80%;height:40px;
+  background:radial-gradient(ellipse at center,rgba(100,110,140,0.08) 0%,transparent 70%);
+  filter:blur(8px);
+}
+/* 远景柱列：用伪元素 + clip-path 画出遗迹柱子*/
+.ruins-pillars-far{
+  position:absolute;bottom:0;left:0;right:0;height:45%;
+  opacity:0.12;
+}
+.ruins-pillars-far::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to top,#0d0d12,transparent);
+  clip-path:polygon(
+    0% 100%,0% 60%,3% 58%,3% 100%,
+    7% 100%,7% 45%,9% 43%,9% 100%,
+    14% 100%,14% 52%,16% 50%,16% 100%,
+    22% 100%,22% 38%,24% 36%,24% 100%,
+    30% 100%,30% 55%,32% 53%,32% 100%,
+    38% 100%,38% 42%,40% 40%,40% 100%,
+    46% 100%,46% 48%,48% 46%,48% 100%,
+    54% 100%,54% 35%,56% 33%,56% 100%,
+    62% 100%,62% 50%,64% 48%,64% 100%,
+    70% 100%,70% 40%,72% 38%,72% 100%,
+    78% 100%,78% 55%,80% 53%,80% 100%,
+    86% 100%,86% 45%,88% 43%,88% 100%,
+    93% 100%,93% 58%,95% 56%,95% 100%,
+    100% 100%
+  );
+}
+/* 中景柱列：更清晰，更近 */
+.ruins-pillars-mid{
+  position:absolute;bottom:0;left:0;right:0;height:30%;
+  opacity:0.08;
+}
+.ruins-pillars-mid::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to top,#08080c,transparent);
+  clip-path:polygon(
+    0% 100%,0% 70%,4% 68%,4% 100%,
+    12% 100%,12% 50%,16% 48%,16% 100%,
+    25% 100%,25% 40%,28% 38%,28% 100%,
+    38% 100%,38% 60%,42% 58%,42% 100%,
+    52% 100%,52% 35%,56% 33%,56% 100%,
+    68% 100%,68% 55%,72% 53%,72% 100%,
+    82% 100%,82% 45%,86% 43%,86% 100%,
+    100% 100%,100% 65%
+  );
+}
+/* 近景：单根巨柱残影（左侧）*/
+.ruins-pillar-near{
+  position:absolute;bottom:0;left:8%;width:14%;height:60%;
+  opacity:0.06;
+  background:linear-gradient(to top,#0a0a0e 0%,#0d0d12 70%,transparent 100%);
+  border-radius:2px 2px 0 0;
+}
+.ruins-pillar-near::after{
+  content:'';position:absolute;top:-4%;left:15%;right:15%;height:8px;
+  background:#0a0a0e;
+  border-radius:2px;
+}
+/* 雾气层 */
+.ruins-fog{
+  position:absolute;bottom:0;left:0;right:0;height:40%;
+  background:linear-gradient(to top,rgba(10,10,14,0.8) 0%,rgba(10,10,14,0.2) 50%,transparent 100%);
+  pointer-events:none;
+}
+
+/* === Section 间废墟地平线分隔 === */
+.section-divider{
+  height:1px;background:linear-gradient(to right,transparent,rgba(80,90,120,0.08) 20%,rgba(100,110,140,0.12) 50%,rgba(80,90,120,0.08) 80%,transparent);
+  margin:0;position:relative;
+}
+.section-divider::after{
+  content:'';position:absolute;left:50%;top:-3px;transform:translateX(-50%);
+  width:40px;height:6px;
+  background:radial-gradient(ellipse at center,rgba(100,110,140,0.06) 0%,transparent 70%);
+  filter:blur(4px);
+}
+
 .section{padding:var(--space-3xl) 24px;position:relative}
 .section-inner{max-width:1000px;margin:0 auto}
 .section-label{font-family:var(--font-mono);font-size:13px;color:var(--text-tertiary);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:24px;display:flex;align-items:center;gap:12px}
@@ -420,6 +519,13 @@ body{
 
 <section class="hero" id="hero">
   <div class="hero-bg"></div>
+  <div class="ruins-bg">
+    <div class="ruins-pillars-far"></div>
+    <div class="ruins-pillars-mid"></div>
+    <div class="ruins-pillar-near"></div>
+    <div class="ruins-horizon"></div>
+    <div class="ruins-fog"></div>
+  </div>
   <div class="hero-glow" id="heroGlow"></div>
   <div class="hero-content">
     <div class="hero-eyebrow gsap-reveal">医疗AI产品经理</div>
@@ -448,6 +554,7 @@ body{
     <div class="hero-scroll-line"></div>
   </div>
 </section>
+<div class="section-divider"></div>
 
 <section class="section" id="about">
   <div class="section-inner">
@@ -492,6 +599,7 @@ body{
     </div>
   </div>
 </section>
+<div class="section-divider"></div>
 
 <section class="section" id="experience">
   <div class="section-inner">
@@ -561,6 +669,7 @@ body{
     </div>
   </div>
 </section>
+<div class="section-divider"></div>
 
 <section class="section" id="projects">
   <div class="section-inner">
@@ -656,6 +765,7 @@ body{
     </div>
   </div>
 </section>
+<div class="section-divider"></div>
 
 <section class="section" id="opensource">
   <div class="section-inner">
@@ -705,6 +815,7 @@ body{
     </div>
   </div>
 </section>
+<div class="section-divider"></div>
 
 <section class="section" id="exploring">
   <div class="section-inner">
@@ -732,6 +843,7 @@ body{
     </div>
   </div>
 </section>
+<div class="section-divider"></div>
 
 <section class="section" id="skills">
   <div class="section-inner">
@@ -814,6 +926,7 @@ body{
     </div>
   </div>
 </section>
+<div class="section-divider"></div>
 
 <section class="section" id="education">
   <div class="section-inner">
@@ -833,6 +946,7 @@ body{
     </div>
   </div>
 </section>
+<div class="section-divider"></div>
 
 <section class="contact" id="contact">
   <div class="contact-eyebrow gsap-reveal">08 — 联系</div>
@@ -995,6 +1109,23 @@ window.addEventListener('scroll', () => {
   const scrollPercent = (window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
   progressBar.style.width = scrollPercent + '%';
 }, { passive: true });
+
+// === 废墟视差 ===
+const ruinsFar = document.querySelector('.ruins-pillars-far');
+const ruinsMid = document.querySelector('.ruins-pillars-mid');
+const ruinsNear = document.querySelector('.ruins-pillar-near');
+const ruinsFog = document.querySelector('.ruins-fog');
+if(!prefersReducedMotion){
+  window.addEventListener('scroll', () => {
+    const y = window.pageYOffset;
+    if(y < window.innerHeight * 1.2){
+      if(ruinsFar) ruinsFar.style.transform = 'translateY(' + (y * 0.05) + 'px)';
+      if(ruinsMid) ruinsMid.style.transform = 'translateY(' + (y * 0.12) + 'px)';
+      if(ruinsNear) ruinsNear.style.transform = 'translateY(' + (y * 0.2) + 'px)';
+      if(ruinsFog) ruinsFog.style.transform = 'translateY(' + (y * 0.08) + 'px)';
+    }
+  }, { passive: true });
+}
 
 // === 2. Hero 鼠标跟随光晕 ===
 const heroGlow = document.getElementById('heroGlow');
