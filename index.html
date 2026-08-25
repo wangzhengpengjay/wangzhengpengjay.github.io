@@ -123,134 +123,122 @@ body{
 .hero-bg{position:absolute;inset:0;z-index:0;opacity:0.4;background-image:radial-gradient(ellipse at top,rgba(255,255,255,0.04) 0%,transparent 60%),radial-gradient(ellipse at bottom,rgba(255,255,255,0.02) 0%,transparent 50%)}
 
 /* === 巨构废墟背景 === */
-.ruins-bg{
+.palace-bg{
   position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% 100%, rgba(40,20,5,0.8) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 50% 30%, rgba(180,130,60,0.15) 0%, transparent 55%),
+    linear-gradient(to bottom, #0a0c12 0%, #0d0a0a 50%, #070505 100%);
 }
-/* 远景：微弱冷光地平线（废墟日出感）*/
-.ruins-horizon{
-  position:absolute;bottom:0;left:0;right:0;height:50%;
-  background:linear-gradient(to top,
-    rgba(20,22,30,0.6) 0%,
-    rgba(15,17,25,0.3) 30%,
-    transparent 70%);
-}
-.ruins-horizon::before{
-  content:'';position:absolute;bottom:38%;left:50%;transform:translateX(-50%);
-  width:120%;height:1px;
-  background:linear-gradient(to right,transparent,rgba(80,90,120,0.15) 30%,rgba(100,110,140,0.2) 50%,rgba(80,90,120,0.15) 70%,transparent);
-  filter:blur(0.5px);
-}
-.ruins-horizon::after{
-  content:'';position:absolute;bottom:37%;left:50%;transform:translateX(-50%);
-  width:80%;height:40px;
-  background:radial-gradient(ellipse at center,rgba(100,110,140,0.08) 0%,transparent 70%);
+/* 暖金天光 */
+.celestial-glow{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 50% 30% at 55% 15%, rgba(255,210,120,0.18) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 25% at 50% 25%, rgba(255,180,80,0.1) 0%, transparent 55%);
   filter:blur(8px);
 }
-/* 远景柱列：用伪元素 + clip-path 画出遗迹柱子*/
-.ruins-pillars-far{
-  position:absolute;bottom:0;left:0;right:0;height:45%;
-  opacity:0.28;
-}
-.ruins-pillars-far::before{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(to top,#0d0d12,transparent);
-  clip-path:polygon(
-    0% 100%,0% 60%,3% 58%,3% 100%,
-    7% 100%,7% 45%,9% 43%,9% 100%,
-    14% 100%,14% 52%,16% 50%,16% 100%,
-    22% 100%,22% 38%,24% 36%,24% 100%,
-    30% 100%,30% 55%,32% 53%,32% 100%,
-    38% 100%,38% 42%,40% 40%,40% 100%,
-    46% 100%,46% 48%,48% 46%,48% 100%,
-    54% 100%,54% 35%,56% 33%,56% 100%,
-    62% 100%,62% 50%,64% 48%,64% 100%,
-    70% 100%,70% 40%,72% 38%,72% 100%,
-    78% 100%,78% 55%,80% 53%,80% 100%,
-    86% 100%,86% 45%,88% 43%,88% 100%,
-    93% 100%,93% 58%,95% 56%,95% 100%,
-    100% 100%
-  );
-}
-/* 中景柱列：更清晰，更近 */
-.ruins-pillars-mid{
-  position:absolute;bottom:0;left:0;right:0;height:30%;
-  opacity:0.20;
-}
-.ruins-pillars-mid::before{
-  content:'';position:absolute;inset:0;
-  background:linear-gradient(to top,#08080c,transparent);
-  clip-path:polygon(
-    0% 100%,0% 70%,4% 68%,4% 100%,
-    12% 100%,12% 50%,16% 48%,16% 100%,
-    25% 100%,25% 40%,28% 38%,28% 100%,
-    38% 100%,38% 60%,42% 58%,42% 100%,
-    52% 100%,52% 35%,56% 33%,56% 100%,
-    68% 100%,68% 55%,72% 53%,72% 100%,
-    82% 100%,82% 45%,86% 43%,86% 100%,
-    100% 100%,100% 65%
-  );
-}
-/* 近景：单根巨柱残影（左侧）*/
-.ruins-pillar-near{
-  position:absolute;bottom:0;left:8%;width:14%;height:60%;
-  opacity:0.14;
-  background:linear-gradient(to top,#0a0a0e 0%,#0d0d12 70%,transparent 100%);
-  border-radius:2px 2px 0 0;
-}
-.ruins-pillar-near::after{
-  content:'';position:absolute;top:-4%;left:15%;right:15%;height:8px;
-  background:#0a0a0e;
-  border-radius:2px;
-}
-/* 人影剪影：仰望遗迹的观察者 */
-.ruins-figure{
-  position:absolute;bottom:8%;left:50%;width:6px;height:14px;
-  background:var(--text-quaternary);
-  opacity:0.35;
-  border-radius:2px 2px 0 0;
-  box-shadow:0 0 8px rgba(255,255,255,0.08);
-}
-.ruins-figure::before{
-  content:'';position:absolute;bottom:100%;left:50%;transform:translateX(-50%);
-  width:3px;height:3px;background:var(--text-quaternary);
-  border-radius:50%;
-}
-/* 地平线冷光：废墟日出 */
-.ruins-horizon{
-  position:absolute;bottom:0;left:0;right:0;height:50%;
-  background:linear-gradient(to top,
-    rgba(20,24,34,0.75) 0%,
-    rgba(15,19,28,0.35) 30%,
-    transparent 70%);
-}
-.ruins-horizon::before{
-  content:'';position:absolute;bottom:38%;left:50%;transform:translateX(-50%);
-  width:140%;height:1px;
-  background:linear-gradient(to right,transparent,rgba(80,100,140,0.35) 30%,rgba(110,130,180,0.45) 50%,rgba(80,100,140,0.35) 70%,transparent);
-  filter:blur(0.5px);
-}
-.ruins-horizon::after{
-  content:'';position:absolute;bottom:37%;left:50%;transform:translateX(-50%);
-  width:90%;height:60px;
-  background:radial-gradient(ellipse at center,rgba(100,120,170,0.15) 0%,transparent 70%);
+/* 云海 */
+.cloud-sea{
+  position:absolute;bottom:0;left:-10%;right:-10%;height:35%;
+  background:
+    radial-gradient(ellipse 30% 12% at 20% 80%, rgba(255,240,210,0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 35% 14% at 50% 75%, rgba(255,230,190,0.14) 0%, transparent 70%),
+    radial-gradient(ellipse 30% 12% at 80% 82%, rgba(255,240,210,0.12) 0%, transparent 70%),
+    linear-gradient(to top, rgba(255,235,200,0.08) 0%, transparent 50%);
   filter:blur(12px);
 }
-/* 雾气层 */
-.ruins-fog{
-  position:absolute;bottom:0;left:0;right:0;height:45%;
-  background:linear-gradient(to top,rgba(10,10,14,0.85) 0%,rgba(10,10,14,0.35) 50%,transparent 100%);
+/* 浮岛 */
+.floating-island{
+  position:absolute;bottom:0;width:14%;aspect-ratio:3/1;
+  background:linear-gradient(to top, rgba(40,35,30,0.7), rgba(20,18,15,0.3));
+  border-radius:50% 50% 45% 45% / 60% 60% 40% 40%;
+  box-shadow:0 -10px 40px rgba(0,0,0,0.4), inset 0 5px 15px rgba(255,220,150,0.05);
+}
+.floating-island::before{
+  content:'';position:absolute;bottom:100%;left:20%;right:20%;height:40%;
+  background:linear-gradient(to top, rgba(60,55,48,0.5), transparent);
+  clip-path:polygon(30% 100%, 0% 0%, 100% 0%, 70% 100%);
+}
+.island-far-1{bottom:28%;left:8%;width:12%;opacity:0.5;transform:scale(0.8)}
+.island-far-2{bottom:22%;left:70%;width:16%;opacity:0.45;transform:scale(0.9)}
+/* 宫殿主体 */
+.palace-layer{position:absolute;bottom:0;left:0;right:0;height:100%;pointer-events:none}
+.palace-pillar{
+  position:absolute;bottom:0;width:2.8%;min-width:18px;max-width:48px;
+  background:linear-gradient(to right, rgba(130,20,15,0.9) 0%, rgba(200,45,35,0.85) 30%, rgba(130,20,15,0.9) 100%);
+  border-radius:1px 1px 0 0;
+  box-shadow:0 0 12px rgba(220,80,40,0.15), inset 2px 0 4px rgba(255,200,120,0.15);
+}
+.palace-pillar::before{
+  content:'';position:absolute;top:-6px;left:-4px;right:-4px;height:8px;
+  background:linear-gradient(to bottom, rgba(255,215,120,0.9), rgba(180,140,60,0.8));
+  border-radius:2px;
+  box-shadow:0 0 6px rgba(255,200,90,0.3);
+}
+.palace-pillar-tall{height:34%}
+.palace-pillar-mid{height:24%}
+.palace-pillar-short{height:16%}
+/* 白玉台基 */
+.jade-platform{
+  position:absolute;bottom:0;left:0;right:0;height:8%;
+  background:linear-gradient(to top, rgba(230,235,240,0.18) 0%, rgba(220,228,235,0.1) 70%, transparent 100%);
+  border-top:1px solid rgba(255,255,255,0.15);
+  box-shadow:0 -4px 20px rgba(255,255,255,0.08);
+}
+.jade-platform::before{
+  content:'';position:absolute;bottom:100%;left:0;right:0;height:6px;
+  background:repeating-linear-gradient(90deg, transparent 0px, transparent 8px, rgba(255,255,255,0.08) 8px, rgba(255,255,255,0.08) 10px);
+}
+/* 金琉璃屋顶 */
+.palace-roof{
+  position:absolute;bottom:34%;left:50%;transform:translateX(-50%);
+  width:40%;height:8%;
+  background:linear-gradient(to bottom, rgba(255,200,60,0.9) 0%, rgba(200,150,40,0.7) 60%, transparent 100%);
+  border-radius:50% 50% 0 0 / 100% 100% 0 0;
+  box-shadow:0 -8px 30px rgba(255,180,50,0.25), inset 0 4px 10px rgba(255,230,150,0.3);
+}
+.palace-roof::before{
+  content:'';position:absolute;bottom:0;left:10%;right:10%;height:40%;
+  background:linear-gradient(to bottom, rgba(255,220,120,0.5), transparent);
+  border-radius:50% 50% 0 0 / 100% 100% 0 0;
+}
+/* 飞檐翘角 */
+.palace-eave{
+  position:absolute;bottom:40%;left:30%;width:3%;height:5%;
+  background:linear-gradient(to right, transparent, rgba(255,200,80,0.8) 50%, transparent);
+  transform:rotate(-30deg);
+  transform-origin:bottom left;
+}
+.palace-eave-right{left:67%;transform:rotate(30deg);transform-origin:bottom right}
+/* 人影 */
+.palace-figure{
+  position:absolute;bottom:8%;left:50%;width:6px;height:16px;
+  background:rgba(255,235,200,0.5);
+  border-radius:2px 2px 0 0;
+  box-shadow:0 0 8px rgba(255,210,120,0.3);
+}
+.palace-figure::before{
+  content:'';position:absolute;bottom:100%;left:50%;transform:translateX(-50%);
+  width:3px;height:3px;background:rgba(255,235,200,0.5);border-radius:50%;
+}
+/* 近景雾气 */
+.palace-mist{
+  position:absolute;bottom:0;left:0;right:0;height:25%;
+  background:linear-gradient(to top, rgba(10,10,14,0.6) 0%, transparent 100%);
   pointer-events:none;
+  filter:blur(6px);
 }
 
-/* === Section 间废墟地平线分隔 === */
+/* === Section 间分隔 === */
 .section-divider{
-  height:1px;background:linear-gradient(to right,transparent,rgba(80,90,120,0.12) 20%,rgba(100,110,140,0.18) 50%,rgba(80,90,120,0.12) 80%,transparent);
+  height:1px;background:linear-gradient(to right,transparent,rgba(140,120,80,0.12) 20%,rgba(180,150,90,0.18) 50%,rgba(140,120,80,0.12) 80%,transparent);
   margin:0;position:relative;
 }
 .section-divider::after{
   content:'';position:absolute;left:50%;top:-3px;transform:translateX(-50%);
   width:60px;height:6px;
-  background:radial-gradient(ellipse at center,rgba(100,110,140,0.10) 0%,transparent 70%);
+  background:radial-gradient(ellipse at center,rgba(180,150,90,0.1) 0%,transparent 70%);
   filter:blur(4px);
 }
 
@@ -552,13 +540,31 @@ body{
 
 <section class="hero" id="hero">
   <div class="hero-bg"></div>
-  <div class="ruins-bg">
-    <div class="ruins-pillars-far"></div>
-    <div class="ruins-pillars-mid"></div>
-    <div class="ruins-pillar-near"></div>
-    <div class="ruins-figure"></div>
-    <div class="ruins-horizon"></div>
-    <div class="ruins-fog"></div>
+  <div class="palace-bg">
+    <div class="celestial-glow"></div>
+    <div class="cloud-sea"></div>
+    <div class="floating-island island-far-1"></div>
+    <div class="floating-island island-far-2"></div>
+    <div class="palace-layer" id="palaceMain">
+      <div class="palace-pillar palace-pillar-tall" style="left:4%;"></div>
+      <div class="palace-pillar palace-pillar-mid" style="left:12%;"></div>
+      <div class="palace-pillar palace-pillar-tall" style="left:20%;"></div>
+      <div class="palace-pillar palace-pillar-short" style="left:29%;"></div>
+      <div class="palace-pillar palace-pillar-tall" style="left:37%;"></div>
+      <div class="palace-pillar palace-pillar-mid" style="left:45%;"></div>
+      <div class="palace-pillar palace-pillar-tall" style="left:53%;"></div>
+      <div class="palace-pillar palace-pillar-short" style="left:62%;"></div>
+      <div class="palace-pillar palace-pillar-mid" style="left:70%;"></div>
+      <div class="palace-pillar palace-pillar-tall" style="left:78%;"></div>
+      <div class="palace-pillar palace-pillar-mid" style="left:86%;"></div>
+      <div class="palace-pillar palace-pillar-short" style="left:92%;"></div>
+    </div>
+    <div class="palace-roof"></div>
+    <div class="palace-eave"></div>
+    <div class="palace-eave palace-eave-right"></div>
+    <div class="jade-platform"></div>
+    <div class="palace-figure"></div>
+    <div class="palace-mist"></div>
   </div>
   <div class="hero-glow" id="heroGlow"></div>
   <div class="hero-content">
@@ -1145,17 +1151,15 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 
 // === 废墟视差 ===
-const ruinsFar = document.querySelector('.ruins-pillars-far');
-const ruinsMid = document.querySelector('.ruins-pillars-mid');
-const ruinsNear = document.querySelector('.ruins-pillar-near');
+const ruinsFar = document.getElementById('ruinsFar');
+const ruinsMid = document.getElementById('ruinsMid');
 const ruinsFog = document.querySelector('.ruins-fog');
 if(!prefersReducedMotion){
   window.addEventListener('scroll', () => {
     const y = window.pageYOffset;
     if(y < window.innerHeight * 1.2){
-      if(ruinsFar) ruinsFar.style.transform = 'translateY(' + (y * 0.05) + 'px)';
-      if(ruinsMid) ruinsMid.style.transform = 'translateY(' + (y * 0.12) + 'px)';
-      if(ruinsNear) ruinsNear.style.transform = 'translateY(' + (y * 0.2) + 'px)';
+      if(ruinsFar) ruinsFar.style.transform = 'translateY(' + (y * 0.04) + 'px)';
+      if(ruinsMid) ruinsMid.style.transform = 'translateY(' + (y * 0.1) + 'px)';
       if(ruinsFog) ruinsFog.style.transform = 'translateY(' + (y * 0.08) + 'px)';
     }
   }, { passive: true });
