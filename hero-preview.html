@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>医疗AI产品经理 · Hero 预览</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#ffffff;
+  --text-primary:#1a1a1a;
+  --text-secondary:#555;
+  --text-tertiary:#888;
+  --text-quaternary:#bbb;
+  --border:rgba(0,0,0,0.08);
+  --accent:#1a1a1a;
+  --font-display:'Space Grotesk','Noto Sans SC',-apple-system,sans-serif;
+  --font-body:'Noto Sans SC',-apple-system,sans-serif;
+  --font-mono:'SF Mono','JetBrains Mono',monospace;
+}
+html{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{font-family:var(--font-body);background:var(--bg);color:var(--text-primary);overflow-x:hidden}
+
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:16px 24px;
+  background:rgba(255,255,255,0.72);
+  backdrop-filter:saturate(180%) blur(20px);
+  -webkit-backdrop-filter:saturate(180%) blur(20px);
+  border-bottom:1px solid var(--border);
+  transition:padding 0.3s ease;
+}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{font-family:var(--font-display);font-size:18px;font-weight:600;letter-spacing:-0.02em;color:var(--text-primary);text-decoration:none}
+.nav-links{display:flex;gap:32px;align-items:center}
+.nav-link{font-size:14px;color:var(--text-secondary);text-decoration:none;transition:color 0.2s}
+.nav-link:hover{color:var(--text-primary)}
+.nav-cta{font-size:14px;font-weight:500;color:#fff;background:var(--accent);padding:8px 18px;border-radius:9999px;text-decoration:none;margin-left:32px}
+@media(max-width:768px){.nav-links{gap:16px}.nav-link:not(.nav-cta){display:none}.nav-cta{margin-left:0}}
+
+.hero{min-height:100vh;position:relative;overflow:hidden;background:var(--bg)}
+
+.hero-content{
+  position:absolute;top:0;left:0;right:0;height:75%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:60px 24px 0;z-index:5;
+}
+.hero-eyebrow{font-family:var(--font-mono);font-size:13px;color:var(--text-tertiary);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:28px}
+.hero-name{font-family:var(--font-display);font-size:clamp(32px,5.2vw,60px);font-weight:700;line-height:1.05;letter-spacing:-0.03em;color:var(--text-primary);margin-bottom:24px}
+.hero-role{font-family:var(--font-display);font-size:clamp(17px,2.5vw,24px);font-weight:400;color:var(--text-secondary);letter-spacing:-0.01em;margin-bottom:28px;line-height:1.5}
+.hero-role span{color:var(--text-primary);font-weight:500}
+.hero-meta{display:flex;gap:48px;justify-content:center;flex-wrap:wrap}
+.hero-meta-item{text-align:center}
+.hero-meta-num{font-family:var(--font-display);font-size:clamp(32px,5vw,48px);font-weight:700;color:var(--text-primary);line-height:1;letter-spacing:-0.03em}
+.hero-meta-label{font-size:13px;color:var(--text-tertiary);margin-top:8px}
+
+.hero-scroll{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--text-tertiary);font-size:12px;letter-spacing:0.05em;z-index:10}
+.hero-scroll-line{width:1px;height:32px;background:linear-gradient(to bottom,transparent,var(--text-tertiary));animation:scrollHint 2s ease-in-out infinite}
+@keyframes scrollHint{0%,100%{opacity:0.3;transform:scaleY(0.5)}50%{opacity:1;transform:scaleY(1)}}
+
+/* 产品扇形弧区域 — 下1/4，从左下1/2到右下1/2 */
+.products-arc{position:absolute;bottom:0;left:0;right:0;height:30%;z-index:2;pointer-events:none}
+.products-svg{position:absolute;bottom:0;left:0;width:100%;height:100%;z-index:0}
+.product-node{position:absolute;z-index:3;pointer-events:auto;transform:translateX(-50%)}
+.product-card{
+  background:#fff;border:1px solid var(--border);border-radius:12px;padding:10px;
+  box-shadow:0 8px 28px rgba(0,0,0,0.12);transition:transform 0.3s ease,box-shadow 0.3s ease;
+  display:flex;align-items:center;justify-content:center;
+}
+.product-card:hover{transform:translateY(-6px);box-shadow:0 16px 44px rgba(0,0,0,0.2)}
+.product-card img{max-width:100px;max-height:64px;object-fit:contain;border-radius:6px}
+.product-card.text-card{min-width:80px;padding:12px 16px}
+.product-card.text-card .product-text{font-family:var(--font-display);font-size:13px;font-weight:500;color:var(--text-primary);text-align:center;white-space:nowrap}
+.product-label{position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);font-size:11px;color:var(--text-tertiary);font-weight:500;white-space:nowrap}
+
+.fade-in{opacity:0;transform:translateY(20px);transition:opacity 0.6s ease,transform 0.6s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+
+@media(max-width:768px){
+  .products-arc{height:28%}
+  .product-card img{max-width:60px;max-height:38px}
+  .product-card.text-card{min-width:50px;padding:6px 8px}
+  .product-card.text-card .product-text{font-size:10px}
+  .product-label{font-size:9px;bottom:-14px}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">医疗AI产品经理</a>
+    <div class="nav-links">
+      <a href="#about" class="nav-link">关于</a>
+      <a href="#experience" class="nav-link">经历</a>
+      <a href="#projects" class="nav-link">项目</a>
+      <a href="#opensource" class="nav-link">开源</a>
+      <a href="#exploring" class="nav-link">探索</a>
+      <a href="#skills" class="nav-link">能力</a>
+      <a href="#contact" class="nav-link nav-cta">联系我</a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero" id="hero">
+
+  <div class="hero-content">
+    <div class="hero-eyebrow fade-in">医疗AI产品经理</div>
+    <h1 class="hero-name fade-in">让AI真正落地医疗场景</h1>
+    <p class="hero-role fade-in">
+      <span>临床医学</span>背景，<span>AI大模型</span>驱动的<br>
+      医疗健康产品构建者 · 独立开源开发者
+    </p>
+    <div class="hero-meta fade-in">
+      <div class="hero-meta-item">
+        <div class="hero-meta-num">5</div>
+        <div class="hero-meta-label">年医疗AI经验</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-num">96%</div>
+        <div class="hero-meta-label">高风险识别率</div>
+      </div>
+      <div class="hero-meta-item">
+        <div class="hero-meta-num">10%+</div>
+        <div class="hero-meta-label">对话效果提升</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="products-arc" id="productsArc">
+    <!-- S型弯曲虚线：每两个产品之间一条独立的S曲线 -->
+    <svg class="products-svg" viewBox="0 0 1440 320" preserveAspectRatio="none">
+      <!-- 节点1(8%,60%) → 节点2(20%,30%) -->
+      <path d="M 115 200 C 160 120, 200 80, 288 96" stroke="rgba(0,0,0,0.1)" stroke-width="1.5" stroke-dasharray="4 6" fill="none"/>
+      <!-- 节点2(20%,30%) → 节点3(31%,65%) -->
+      <path d="M 288 96 C 340 140, 380 180, 446 208" stroke="rgba(0,0,0,0.1)" stroke-width="1.5" stroke-dasharray="4 6" fill="none"/>
+      <!-- 节点3(31%,65%) → 节点4(42%,25%) -->
+      <path d="M 446 208 C 520 140, 560 70, 605 80" stroke="rgba(0,0,0,0.1)" stroke-width="1.5" stroke-dasharray="4 6" fill="none"/>
+      <!-- 节点4(42%,25%) → 节点5(53%,55%) -->
+      <path d="M 605 80 C 660 120, 700 160, 763 176" stroke="rgba(0,0,0,0.1)" stroke-width="1.5" stroke-dasharray="4 6" fill="none"/>
+      <!-- 节点5(53%,55%) → 节点6(64%,22%) -->
+      <path d="M 763 176 C 820 120, 860 60, 922 70" stroke="rgba(0,0,0,0.1)" stroke-width="1.5" stroke-dasharray="4 6" fill="none"/>
+      <!-- 节点6(64%,22%) → 节点7(75%,60%) -->
+      <path d="M 922 70 C 980 110, 1020 160, 1080 192" stroke="rgba(0,0,0,0.1)" stroke-width="1.5" stroke-dasharray="4 6" fill="none"/>
+      <!-- 节点7(75%,60%) → 节点8(88%,30%) -->
+      <path d="M 1080 192 C 1160 140, 1200 80, 1267 96" stroke="rgba(0,0,0,0.1)" stroke-width="1.5" stroke-dasharray="4 6" fill="none"/>
+    </svg>
+
+    <!-- 8个产品节点，从左下1/2到右下1/2扇形弧分布 -->
+    <!-- 1: 临床结构化数据集-宫颈癌（图片+标签） -->
+    <div class="product-node" style="left:8%;bottom:40%">
+      <div class="product-card"><img src="img-cervical.png" alt="临床结构化数据集-宫颈癌"></div>
+      <div class="product-label">临床结构化数据集-宫颈癌</div>
+    </div>
+
+    <!-- 2: 科研平台（文字） -->
+    <div class="product-node" style="left:20%;bottom:70%">
+      <div class="product-card text-card"><div class="product-text">科研平台</div></div>
+    </div>
+
+    <!-- 3: 专病库（文字） -->
+    <div class="product-node" style="left:31%;bottom:35%">
+      <div class="product-card text-card"><div class="product-text">专病库</div></div>
+    </div>
+
+    <!-- 4: 讯飞晓医（图片+标签） -->
+    <div class="product-node" style="left:42%;bottom:75%">
+      <div class="product-card"><img src="img-xiaoyi.png" alt="讯飞晓医"></div>
+      <div class="product-label">讯飞晓医</div>
+    </div>
+
+    <!-- 5: 数智家医（文字） -->
+    <div class="product-node" style="left:53%;bottom:45%">
+      <div class="product-card text-card"><div class="product-text">数智家医</div></div>
+    </div>
+
+    <!-- 6: 健康管理（文字） -->
+    <div class="product-node" style="left:64%;bottom:78%">
+      <div class="product-card text-card"><div class="product-text">健康管理</div></div>
+    </div>
+
+    <!-- 7: 团检分析（文字） -->
+    <div class="product-node" style="left:75%;bottom:40%">
+      <div class="product-card text-card"><div class="product-text">团检分析</div></div>
+    </div>
+
+    <!-- 8: 体检推荐（文字） -->
+    <div class="product-node" style="left:88%;bottom:70%">
+      <div class="product-card text-card"><div class="product-text">体检推荐</div></div>
+    </div>
+  </div>
+
+  <div class="hero-scroll fade-in">
+    <span>SCROLL</span>
+    <div class="hero-scroll-line"></div>
+  </div>
+</section>
+
+<script>
+window.addEventListener('load', () => {
+  const items = document.querySelectorAll('.fade-in');
+  items.forEach((el, i) => {
+    setTimeout(() => el.classList.add('visible'), 150 + i * 150);
+  });
+});
+</script>
+
+</body>
+</html>
