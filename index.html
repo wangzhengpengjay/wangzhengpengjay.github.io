@@ -59,6 +59,12 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--text-primary)
 .product-card.text-card{min-width:80px;padding:12px 16px}
 .product-card.text-card .product-text{font-family:var(--font-display);font-size:13px;font-weight:500;color:var(--text-primary);text-align:center;white-space:nowrap}
 .product-label{position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);font-size:11px;color:var(--text-tertiary);font-weight:500;white-space:nowrap}
+
+/* 产品浮窗 */
+.product-tooltip{position:fixed;z-index:300;max-width:280px;padding:16px 20px;background:#fff;border:1px solid var(--border);border-radius:12px;box-shadow:0 12px 40px rgba(0,0,0,0.15);opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity 0.25s ease,transform 0.25s ease,visibility 0.25s;pointer-events:none}
+.product-tooltip.visible{opacity:1;visibility:visible;transform:translateY(0)}
+.product-tooltip-title{font-family:var(--font-display);font-size:15px;font-weight:600;color:var(--text-primary);margin-bottom:8px;letter-spacing:-0.01em}
+.product-tooltip-desc{font-size:13px;line-height:1.6;color:var(--text-secondary)}
 @media(max-width:768px){.products-arc{height:28%}.product-card img{max-width:60px;max-height:38px}.product-card.text-card{min-width:50px;padding:6px 8px}.product-card.text-card .product-text{font-size:10px}.product-label{font-size:9px;bottom:-14px}}
 
 .section{padding:var(--space-3xl) 24px;position:relative}
@@ -212,14 +218,14 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--text-primary)
       <path d="M 922 70 C 980 110, 1020 160, 1080 192" stroke="rgba(0,0,0,0.1)" stroke-width="1.5" stroke-dasharray="4 6" fill="none"/>
       <path d="M 1080 192 C 1160 140, 1200 80, 1267 96" stroke="rgba(0,0,0,0.1)" stroke-width="1.5" stroke-dasharray="4 6" fill="none"/>
     </svg>
-    <div class="product-node" style="left:8%;bottom:40%"><div class="product-card"><img src="img-cervical.png" alt="临床结构化数据集-宫颈癌"></div><div class="product-label">临床结构化数据集-宫颈癌</div></div>
-    <div class="product-node" style="left:20%;bottom:70%"><div class="product-card text-card"><div class="product-text">科研平台</div></div></div>
-    <div class="product-node" style="left:31%;bottom:35%"><div class="product-card text-card"><div class="product-text">专病库</div></div></div>
-    <div class="product-node" style="left:42%;bottom:75%"><div class="product-card"><img src="img-xiaoyi.png" alt="讯飞晓医"></div><div class="product-label">讯飞晓医</div></div>
-    <div class="product-node" style="left:53%;bottom:45%"><div class="product-card text-card"><div class="product-text">数智家医</div></div></div>
-    <div class="product-node" style="left:64%;bottom:78%"><div class="product-card text-card"><div class="product-text">健康管理</div></div></div>
-    <div class="product-node" style="left:75%;bottom:40%"><div class="product-card text-card"><div class="product-text">团检分析</div></div></div>
-    <div class="product-node" style="left:88%;bottom:70%"><div class="product-card text-card"><div class="product-text">体检推荐</div></div></div>
+    <div class="product-node" data-title="临床结构化数据集-宫颈癌" data-desc="参照CDASH、SNOMED-CT、HL7等国际标准，主导宫颈癌数据集设计与变量提取，构建国内权威数据交换标准并发表。" style="left:8%;bottom:40%"><div class="product-card"><img src="img-cervical.png" alt="临床结构化数据集-宫颈癌"></div><div class="product-label">临床结构化数据集-宫颈癌</div></div>
+    <div class="product-node" data-title="科研平台" data-desc="面向临床科研的一体化数据平台，支持多源医疗数据的采集、治理与分析，加速科研课题从数据到成果的转化。" style="left:20%;bottom:70%"><div class="product-card text-card"><div class="product-text">科研平台</div></div></div>
+    <div class="product-node" data-title="专病库" data-desc="基于Omaha术语体系构建的专科疾病数据库，覆盖结构化术语映射、病历数据抽取与标准化，支撑NLP模型训练与院端部署。" style="left:31%;bottom:35%"><div class="product-card text-card"><div class="product-text">专病库</div></div></div>
+    <div class="product-node" data-title="讯飞晓医" data-desc="讯飞医疗AI诊疗助手，基于医疗大模型提供智能问诊、报告解读与健康咨询，覆盖居民端与医生端双端场景。" style="left:42%;bottom:75%"><div class="product-card"><img src="img-xiaoyi.png" alt="讯飞晓医"></div><div class="product-label">讯飞晓医</div></div>
+    <div class="product-node" data-title="数智家医" data-desc="AI驱动的数字化家庭医生服务系统，设计“AI管基础+康复、医生管重点”分层协同机制，高风险识别率达96%。" style="left:53%;bottom:45%"><div class="product-card text-card"><div class="product-text">数智家医</div></div></div>
+    <div class="product-node" data-title="健康管理" data-desc="全病程健康管理服务，覆盖健康教育、康复指导与随访跟踪，从用户日志洞察痛点并主导商业化验证。" style="left:64%;bottom:78%"><div class="product-card text-card"><div class="product-text">健康管理</div></div></div>
+    <div class="product-node" data-title="团检分析" data-desc="团体体检报告总体分析平台，设计“1+X+体检推荐”系统逻辑，在招商仁和试验局验证AI全流程落地可行性。" style="left:75%;bottom:40%"><div class="product-card text-card"><div class="product-text">团检分析</div></div></div>
+    <div class="product-node" data-title="体检推荐" data-desc="基于体检数据的智能推荐引擎，结合个体健康画像生成个性化体检项目建议，提升体检筛查效率与精准度。" style="left:88%;bottom:70%"><div class="product-card text-card"><div class="product-text">体检推荐</div></div></div>
   </div>
   <div class="hero-scroll fade-in"><span>SCROLL</span><div class="hero-scroll-line"></div></div>
 </section>
@@ -426,6 +432,25 @@ window.addEventListener('scroll',()=>{const h=document.documentElement;const p=h
 
 // Hero fade-in
 window.addEventListener('load',()=>{document.querySelectorAll('.fade-in').forEach((el,i)=>{setTimeout(()=>el.classList.add('visible'),150+i*150)})});
+
+// 产品浮窗
+const tooltip=document.createElement('div');tooltip.className='product-tooltip';document.body.appendChild(tooltip);
+tooltip.innerHTML='<div class="product-tooltip-title"></div><div class="product-tooltip-desc"></div>';
+document.querySelectorAll('.product-node').forEach(node=>{
+  node.addEventListener('mouseenter',()=>{
+    tooltip.querySelector('.product-tooltip-title').textContent=node.dataset.title||'';
+    tooltip.querySelector('.product-tooltip-desc').textContent=node.dataset.desc||'';
+    tooltip.classList.add('visible');
+  });
+  node.addEventListener('mousemove',(e)=>{
+    const tw=tooltip.offsetWidth,th=tooltip.offsetHeight;
+    let x=e.clientX+16,y=e.clientY-th/2;
+    if(x+tw>window.innerWidth)x=e.clientX-tw-16;
+    if(y<8)y=8;if(y+th>window.innerHeight-8)y=window.innerHeight-th-16;
+    tooltip.style.left=x+'px';tooltip.style.top=y+'px';
+  });
+  node.addEventListener('mouseleave',()=>{tooltip.classList.remove('visible')});
+});
 
 // IntersectionObserver for gsap-reveal
 document.querySelectorAll('.gsap-reveal').forEach(el=>el.classList.add('anim-init'));
